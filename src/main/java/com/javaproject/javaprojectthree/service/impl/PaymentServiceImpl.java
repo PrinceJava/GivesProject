@@ -1,10 +1,10 @@
 package com.javaproject.javaprojectthree.service.impl;
 
-import com.javaproject.javaprojectthree.model.OrderDetail;
-import com.javaproject.javaprojectthree.service.PaymentService;
 import com.paypal.api.payments.*;
 import com.paypal.base.rest.APIContext;
 import com.paypal.base.rest.PayPalRESTException;
+import com.javaproject.javaprojectthree.model.OrderDetail;
+import com.javaproject.javaprojectthree.service.PaymentService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,8 +68,6 @@ public class PaymentServiceImpl implements PaymentService {
         Payer payer = new Payer();
         payer.setPaymentMethod("paypal");
 
-        //TODO I need to work on setting these values as User Service Values from the JWT Token
-        
         PayerInfo payerInfo = new PayerInfo();
         payerInfo.setFirstName("Matthew")
                 .setLastName("James")

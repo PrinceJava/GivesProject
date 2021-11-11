@@ -8,8 +8,8 @@ import org.springframework.boot.web.servlet.ServletComponentScan;
 @SpringBootApplication
 public class JavaProjectThreeApplication {
 
-    public static void main(String[] args) {
-        SpringApplication.run(JavaProjectThreeApplication.class, args);
-    }
+	public static void main(String[] args) {
+		SpringApplication.run(JavaProjectThreeApplication.class, args);
+	}
 
 }
