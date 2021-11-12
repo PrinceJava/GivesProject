@@ -2,8 +2,12 @@ package com.javaproject.javaprojectthree.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.text.DateFormat;
+import java.time.LocalDate;
+import java.util.Date;
 
 
 @Entity
@@ -17,8 +21,18 @@ public class TransactionLog {
     private Long id;
 
     @Column
-    private String name;
+    private String from;
 
+    @Column
+    private String to;
 
+    @Column
+    private double amount;
+
+    @Column
+    private LocalDate creationDate;
+
+    @Column(columnDefinition = "text")
+    private String comment;
 
 }
