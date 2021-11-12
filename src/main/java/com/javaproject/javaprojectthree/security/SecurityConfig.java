@@ -1,5 +1,6 @@
 package com.javaproject.javaprojectthree.security;
 
+import com.javaproject.javaprojectthree.security.jwt.JwtRequestFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.*;
 import org.springframework.security.authentication.AuthenticationManager;

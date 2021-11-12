@@ -1,5 +1,6 @@
 package com.javaproject.javaprojectthree.security;
 
+import com.javaproject.javaprojectthree.model.User;
 import org.springframework.security.core.GrantedAuthority;
 
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
