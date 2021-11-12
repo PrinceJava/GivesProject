@@ -55,9 +55,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests().antMatchers(
                         "/api/register", "/api/login").permitAll()
-                .antMatchers("/admin/**").access("hasRole('ROLE_RECEIVER')")
-                .antMatchers("/user/**").access("hasRole('ROLE_SENDER')")
-                .antMatchers("/user/**").access("hasRole('ROLE_RECEIVER')")
+//                .antMatchers("/admin/**").access("hasRole('ROLE_RECEIVER')")
+//                .antMatchers("/user/**").access("hasRole('ROLE_SENDER')")
+//                .antMatchers("/user/**").access("hasRole('ROLE_RECEIVER')")
                 .anyRequest().authenticated()
                 .and().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
