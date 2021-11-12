@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 public class JWTUtils {
 
 /*    @Value("${jwt.secret}")*/
-    String SECRET_KEY;
+    String SECRET_KEY = "SECRET_KEY";
 
     //Token Generation staring
     public String generateToken(UserDetails userDetails) {
