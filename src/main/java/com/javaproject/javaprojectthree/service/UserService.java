@@ -57,7 +57,7 @@ public class UserService {
         this.jwtUtils = jwtUtils;
     }
 
-    public User createUser(String userName, String emailAddress, String password, String roleName) {
+    public User createUser(String firstName, String lastName, String userName, String emailAddress, String password, String roleName) {
         System.out.println("service is calling createUser==>");
         // if user not exists by the email
         // then create the user in the db
@@ -65,6 +65,8 @@ public class UserService {
         if (!userRepository.existsByEmailAddress(emailAddress)) {
 
             User newUser = new User();
+            newUser.setFirstName(firstName);
+            newUser.setLastname(lastName);
             newUser.setUserName(userName);
             newUser.setEmailAddress(emailAddress);
             newUser.setPassword(passwordEncoder.encode(password));
