@@ -21,7 +21,20 @@ public class Charity {
     private Long id;
 
     @Column
-    private String name;
+    private String title;
+
+    @Column(columnDefinition = "TEXT")
+    private String description;
+
+    @Column
+    private double goal;
+
+    @Column
+    private boolean verified;
+
+    @Column
+    private boolean goalAchieved = false;
+
 
     @ManyToOne
     @JoinColumn(name = "user_id")
