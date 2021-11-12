@@ -1,5 +1,8 @@
 package com.javaproject.javaprojectthree.model;
 
+import lombok.Data;
+import lombok.RequiredArgsConstructor;
+
 import javax.persistence.*;
 
 @Entity

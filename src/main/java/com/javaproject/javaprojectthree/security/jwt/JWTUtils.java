@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 @Service
 public class JWTUtils {
 
-    @Value("${jwt.secret}")
+/*    @Value("${jwt.secret}")*/
     String SECRET_KEY;
 
     //Token Generation staring
