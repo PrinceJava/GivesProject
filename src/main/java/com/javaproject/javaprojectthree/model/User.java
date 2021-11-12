@@ -11,7 +11,6 @@ import java.util.Collection;
 
 @Entity
 @Data
-@RequiredArgsConstructor
 @Table(name= "users")
 public class User {
 
@@ -33,5 +32,13 @@ public class User {
     @ManyToMany(fetch = FetchType.EAGER)
     private Collection<Role> roles = new ArrayList<>();
 
+    public User(Long id, String userName, String emailAddress, String password) {
+        this.id = id;
+        this.userName = userName;
+        this.emailAddress = emailAddress;
+        this.password = password;
+    }
 
+    public User() {
+    }
 }
