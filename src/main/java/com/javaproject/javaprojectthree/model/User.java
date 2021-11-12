@@ -40,6 +40,10 @@ public class User {
     @ManyToMany(fetch = FetchType.EAGER)
     private Collection<Role> roles = new ArrayList<>();
 
+    @OneToMany(mappedBy = "user")
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<Charity> charityList;
+
 
     public User(Long id, String userName, String emailAddress, String password) {
         this.id = id;
