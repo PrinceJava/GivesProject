@@ -3,11 +3,13 @@ package com.javaproject.javaprojectthree.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
-import lombok.RequiredArgsConstructor;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Data
@@ -37,6 +39,11 @@ public class User {
 
     @ManyToMany(fetch = FetchType.EAGER)
     private Collection<Role> roles = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user")
+    @LazyCollection(LazyCollectionOption.TRUE)
+    private List<Charity> charities;
+
 
     public User(Long id, String userName, String emailAddress, String password) {
         this.id = id;
