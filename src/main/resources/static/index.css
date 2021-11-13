@@ -1,7 +1,21 @@
+/*
+
+COLORS
+PRIMARY -
+GRAY
+    #555
+    #333
+
+
+*/
+
 * {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+}
+html {
+    font-size: 63%;
 }
 
 body {
@@ -11,9 +25,26 @@ body {
     color: #555;
 }
 
-.test {
-    /*width: 1000px;*/
-    max-width: 50rem;
-    background-color: red;
-    padding: 100px;
+.gives {
+    max-width: 130rem;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+.gives-home-img {
+    width: 100%;
+}
+
+.heading-primary {
+    font-size: 5.2rem;
+    font-weight: 700;
+    line-height: 1.05;
+    color: #333;
+    letter-spacing: -0.5px;
+    margin-bottom: 3.2rem;
+}
+.gives-description {
+    font-size: 2.0rem;
+    line-height: 1.6;
+    margin-bottom: 4.8rem;
 }
