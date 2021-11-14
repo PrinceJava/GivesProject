@@ -25,7 +25,12 @@ body {
     font-weight: 400;
     color: #555;
 }
-
+/************** NAVIGATION ******************/
+.main-nav-list {
+    list-style: none;
+    display: flex;
+    gap: 3.2rem;
+}
 /************* GENERAL REUSABLE COMPONENTS **********/
 .heading-primary {
     font-size: 5.2rem;
