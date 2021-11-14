@@ -31,6 +31,20 @@ body {
     display: flex;
     gap: 3.2rem;
 }
+.main-nav-link:link,
+.main-nav-link:visited {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    font-size: 1.8rem;
+    transition: all 0.3s;
+}
+.main-nav-link:hover,
+.main-nav-link:active {
+    color: #7c27cb;
+    font-size: 1.9rem;
+    font-weight: 700;
+}
 /************* GENERAL REUSABLE COMPONENTS **********/
 .heading-primary {
     font-size: 5.2rem;
