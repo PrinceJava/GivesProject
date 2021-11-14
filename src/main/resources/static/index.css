@@ -20,29 +20,13 @@ html {
 }
 
 body {
-    font-family: sans-serif;
+    font-family: "Raleway",sans-serif;
     line-height: 1;
     font-weight: 400;
     color: #555;
 }
-.section-gives {
-    background-color: #f3eafc;
-    padding: 8.6rem 0;
-}
 
-.gives {
-    max-width: 130rem;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8.6rem;
-    align-items: center;
-
-}
-.gives-home-img {
-    width: 100%;
-}
-
+/************* GENERAL REUSABLE COMPONENTS **********/
 .heading-primary {
     font-size: 5.2rem;
     font-weight: 700;
@@ -50,11 +34,6 @@ body {
     color: #333;
     letter-spacing: -0.5px;
     margin-bottom: 3.2rem;
-}
-.gives-description {
-    font-size: 2.0rem;
-    line-height: 1.6;
-    margin-bottom: 4.8rem;
 }
 .btn:link, .btn:visited  {
     display: inline-block;
@@ -68,8 +47,6 @@ body {
 
     transition: all 0.5s;
 }
-
-
 
 .btn--full:link, .btn--full:visited {
     background-color: #8a2be2;
@@ -87,4 +64,44 @@ body {
     background-color: #f3eafc;
     box-shadow: inset 0 0 0 3px #8a2be2;
     color: #8a2be2;
+}
+
+/************* GIVES SECTION **********/
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f3eafc;
+
+    height: 9.6rem;
+    padding: 0 4.8rem;
+}
+
+.logo {
+    height: 6.0rem;
+}
+/************* HEADER **********/
+.section-gives {
+    background-color: #f3eafc;
+    padding: 3.7rem 0 8.6rem 0;
+}
+.gives {
+    max-width: 130rem;
+    margin: 0 auto;
+    padding: 0 3.2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8.6rem;
+    align-items: center;
+
+}
+.gives-home-img {
+    width: 80%;
+    height: 95%;
+    max-height: 130rem;
+}
+.gives-description {
+    font-size: 2.0rem;
+    line-height: 1.6;
+    margin-bottom: 4.8rem;
 }
