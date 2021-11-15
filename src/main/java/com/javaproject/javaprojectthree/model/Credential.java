@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
 
 @Entity
 @Table(name= "credential")
@@ -18,6 +20,5 @@ public class Credential {
     private String CLIENT_ID;
     private String CLIENT_SECRET;
     private String MODE;
-
 
 }
