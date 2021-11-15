@@ -1,0 +1,59 @@
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;300;700&display=swap" rel="stylesheet">
+
+    <link th:href="@{/styles/index.css}" rel="stylesheet">
+    <link href="../static/styles/index.css" rel="stylesheet">
+    <link th:href="@{/styles/general.css}" rel="stylesheet">
+    <link href="../static/styles/general.css" rel="stylesheet">
+
+    <title>Gives</title>
+</head>
+<body>
+<header class="header">
+    <img class="logo" alt="gives-logo-photo" th:src="@{/images/logoB.jpeg}" />
+    <nav class="main-nav">
+        <ul class="main-nav-list">
+            <li><a class="main-nav-link" href="/users/people">People</a></li>
+            <li><a class="main-nav-link" href="#">Charities</a></li>
+            <li><a class="main-nav-link" href="#">Register</a></li>
+            <li><a class="main-nav-link" href="#">Sign In</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <section class="section-gives">
+            <div align="center">
+                <h1>User List</h1>
+                <table border="1">
+                    <thead>
+                    <tr>
+                        <th>User First Name</th>
+                        <th>Last Name</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td th:text="${user.firstName}"></td>
+                        <td th:text="${user.lastname}"></td>
+                        <td th:text="${user.userName}"></td>
+                        <td th:text="${user.emailAddress}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+    </section>
+
+
+</main>
+</body>
+</html>
