@@ -38,6 +38,7 @@
                 <table border="1">
                     <thead>
                     <tr>
+                        <th>Image</th>
                         <th>Charity</th>
                         <th>Goal</th>
                         <th>Total Received</th>
@@ -46,6 +47,7 @@
                     </thead>
                     <tbody>
                     <tr th:each="Charity : ${charities}">
+                        <td><img class="logo" th:src="${Charity.pictureURL}"/></td>
                         <td th:text="${Charity.title}"></td>
                         <td th:text="${Charity.goal}"></td>
                         <td th:text="${Charity.totalReceived}"></td>

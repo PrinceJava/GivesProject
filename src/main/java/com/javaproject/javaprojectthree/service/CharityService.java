@@ -1,9 +1,6 @@
 package com.javaproject.javaprojectthree.service;
 
 import com.javaproject.javaprojectthree.model.Charity;
-import com.javaproject.javaprojectthree.model.User;
-import com.javaproject.javaprojectthree.model.forms.LoginRequest;
-import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
