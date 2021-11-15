@@ -21,18 +21,17 @@ public class TransactionLog {
     private Long id;
 
     @Column
-    private String from;
+    private String title;
 
     @Column
-    private String to;
+    private String sender;
 
     @Column
-    private double amount;
+    private String receiver;
 
     @Column
-    private LocalDate creationDate;
+    private LocalDate date;
 
-    @Column(columnDefinition = "text")
+    @Column(columnDefinition = "TEXT")
     private String comment;
-
 }
