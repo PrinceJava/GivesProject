@@ -16,7 +16,7 @@ import java.util.List;
 @RequestMapping("/charities")
 public class CharityController {
 
-    int ROW_PER_PAGE = 10;
+    int ROW_PER_PAGE = 5;
 
     @Autowired
     CharityService charityService;

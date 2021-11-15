@@ -10,7 +10,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class CredentialServiceImpl implements CredentialService {
 
-    private CredentialService credentialService;
+
+    private final CredentialRepository credentialRepository;
+
+    public CredentialServiceImpl(CredentialRepository credentialRepository) {
+        this.credentialRepository = credentialRepository;
+    }
 
     @Autowired
     public void setCredentialRepository(CredentialRepository credentialRepository) {
@@ -18,6 +23,6 @@ public class CredentialServiceImpl implements CredentialService {
 
     @Override
     public Credential findCredentialById(Long id) {
-        return findCredentialById(id);
+        return credentialRepository.findCredentialById(id);
     }
 }
