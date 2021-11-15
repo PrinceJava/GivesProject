@@ -1,7 +1,10 @@
 package com.javaproject.javaprojectthree.service.impl;
 
+import com.javaproject.javaprojectthree.exception.InformationExistException;
+import com.javaproject.javaprojectthree.model.Charity;
 import com.javaproject.javaprojectthree.model.Role;
 import com.javaproject.javaprojectthree.model.User;
+import com.javaproject.javaprojectthree.repository.CharityRepository;
 import com.javaproject.javaprojectthree.repository.RoleRepository;
 import com.javaproject.javaprojectthree.repository.UserRepository;
 import com.javaproject.javaprojectthree.service.InitService;
@@ -16,12 +19,23 @@ public class InitServiceImpl implements InitService {
 
     UserRepository userRepository;
     RoleRepository roleRepository;
+    CharityRepository charityRepository;
 
     @Autowired
-    public void setUserRepository(UserRepository userRepository){this.userRepository = userRepository;}
+    public void setUserRepository(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     @Autowired
-    public void setRoleRepository(RoleRepository roleRepository){this.roleRepository = roleRepository;}
+    public void setRoleRepository(RoleRepository roleRepository) {
+        this.roleRepository = roleRepository;
+    }
+
+    @Autowired
+    public void setCharityRepository(CharityRepository charityRepository) {
+        this.charityRepository = charityRepository;
+    }
+
 
     @Override
     public User addUser(User userObject) {
@@ -44,6 +58,18 @@ public class InitServiceImpl implements InitService {
         user.setRoles(user.getRoles());
     }
 
+    @Override
+    public Charity createCharity(String title, String description, double goal, double totalReceived, Boolean verified, String pictureURL) {
+        System.out.println("Calling INIT SERVICE createCharity ==>");
+        Charity newCharity = new Charity();
+        newCharity.setTitle(title);
+        newCharity.setDescription(description);
+        newCharity.setGoal(goal);
+        newCharity.setTotalReceived(totalReceived);
+        newCharity.setVerified(verified);
+        newCharity.setPictureURL(pictureURL);
+        return charityRepository.save(newCharity);
+    }
 
     // Database initialize logic goes here
 }
