@@ -30,6 +30,9 @@ public class Charity {
     private double goal;
 
     @Column
+    private double totalReceived;
+
+    @Column
     private Boolean verified;
 
     @Column
