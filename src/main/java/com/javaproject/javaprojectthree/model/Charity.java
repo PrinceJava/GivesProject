@@ -46,4 +46,12 @@ public class Charity {
     @JsonIgnore
     private User user;
 
+    public Charity (String title, String description, double goal, double totalReceived, Boolean verified, String pictureURL){
+        this.title = title;
+        this.description = description;
+        this.goal = goal;
+        this.totalReceived = totalReceived;
+        this.verified = verified;
+        this.pictureURL = pictureURL;
+    }
 }
