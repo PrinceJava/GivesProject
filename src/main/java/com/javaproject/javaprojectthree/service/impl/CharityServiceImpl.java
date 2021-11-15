@@ -24,7 +24,7 @@ public class CharityServiceImpl implements CharityService {
     CharityRepository charityRepository;
 
     @Override
-    public Charity createCharity(String title, String description, double goal, Boolean verified, String user_id, String pictureURL) {
+    public Charity createCharity(String title, String description, double goal, double totalReceived, Boolean verified, String user_id, String pictureURL) {
 
         if (!charityRepository.existsByTitle(title)) {
 
@@ -32,6 +32,7 @@ public class CharityServiceImpl implements CharityService {
             newCharity.setTitle(title);
             newCharity.setDescription(description);
             newCharity.setGoal(goal);
+            newCharity.setTotalReceived(totalReceived);
             newCharity.setVerified(false);
             newCharity.setPictureURL(pictureURL);
             newCharity.setUser(newCharity.getUser());
