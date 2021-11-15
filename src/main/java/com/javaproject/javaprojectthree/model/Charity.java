@@ -30,11 +30,13 @@ public class Charity {
     private double goal;
 
     @Column
-    private boolean verified;
+    private Boolean verified;
 
     @Column
     private boolean goalAchieved = false;
 
+    @Column
+    private String pictureURL;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
