@@ -9,6 +9,7 @@ import java.util.List;
 
 public interface CharityService {
     Charity createCharity(String title, String description, double goal, Boolean verified, String user_id, String pictureURL);
-    List<Charity> findAllCharities();
+    List<Charity> findAllCharities(int pageNumber, int rowPerPage);
     Charity findCharityById(Long id);
+    int count();
 }

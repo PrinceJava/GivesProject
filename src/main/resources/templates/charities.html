@@ -21,8 +21,8 @@
     <nav class="main-nav">
         <ul class="main-nav-list">
             <li><a class="main-nav-link" href="/users/people">People</a></li>
-            <li><a class="main-nav-link" href="#">Charities</a></li>
-            <li><a class="main-nav-link" href="#">Register</a></li>
+            <li><a class="main-nav-link" href="/charities/all">Charities</a></li>
+            <li><a class="main-nav-link" href="/charities/register">Register</a></li>
             <li><a class="main-nav-link" href="#">Sign In</a></li>
         </ul>
     </nav>
@@ -31,25 +31,32 @@
 <main>
     <section class="section-gives">
             <div align="center">
-                <h1>User List</h1>
+                <h1>Charities List</h1>
+                <div>
+                    <a href="charities/register" th:href="@{/charities/register}" rel="sign a charity up">Register A Charity</a>
+                </div>
                 <table border="1">
                     <thead>
                     <tr>
-                        <th>User First Name</th>
-                        <th>Last Name</th>
-                        <th>Username</th>
-                        <th>Email</th>
+                        <th>Charity</th>
+                        <th>Goal</th>
+                        <th>Total Received</th>
+                        <th>Verified</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="User : ${listUsers}">
-                        <td th:text="${User.firstName}"></td>
-                        <td th:text="${User.lastname}"></td>
-                        <td th:text="${User.userName}"></td>
-                        <td th:text="${User.emailAddress}"></td>
+                    <tr th:each="Charity : ${charities}">
+                        <td th:text="${Charity.title}"></td>
+                        <td th:text="${Charity.goal}"></td>
+                        <td th:text="${Charity.totalReceived}"></td>
+                        <td th:text="${Charity.verified}"></td>
                     </tr>
                     </tbody>
                 </table>
+                <div>
+                    <span th:if="${hasPrev}"><a th:href="@{/charities?page={prev}(prev=${prev})}">Prev</a>&nbsp;&nbsp;&nbsp;</span>
+                    <span th:if="${hasNext}"><a th:href="@{/charities?page={next}(next=${next})}">Next</a></span>
+                </div>
             </div>
     </section>
 
