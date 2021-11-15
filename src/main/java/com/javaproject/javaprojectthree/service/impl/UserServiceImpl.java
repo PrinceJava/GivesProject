@@ -93,7 +93,12 @@ public class UserServiceImpl implements UserService {
             return ResponseEntity.ok(new LoginResponse(JWT));
         }
 
-        public List<User> findAllUsers(){
+    @Override
+    public User findUserById(Long id) {
+        return userRepository.findUserById(id);
+    }
+
+    public List<User> findAllUsers(){
         return userRepository.findAll();
         }
 

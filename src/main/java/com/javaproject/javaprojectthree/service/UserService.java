@@ -11,4 +11,5 @@ public interface UserService {
     ResponseEntity<?> loginUser(LoginRequest loginRequest);
     List<User> findAllUsers();
     User findUserByEmailAddress(String email);
+    User findUserById(Long id);
 }
