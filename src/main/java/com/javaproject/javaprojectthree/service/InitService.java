@@ -12,5 +12,6 @@ public interface InitService {
     public Role addRole(Role roleObject);
     public void addUserRole(String username, String roleName);
     public Charity createCharity(String title, String description, double goal, double totalReceived, Boolean verified, String pictureURL);
+    public void addUserToCharity(String username, Long charityId);
 
     }

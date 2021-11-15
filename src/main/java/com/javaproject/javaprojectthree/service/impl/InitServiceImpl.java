@@ -71,5 +71,15 @@ public class InitServiceImpl implements InitService {
         return charityRepository.save(newCharity);
     }
 
+    @Override
+    public void addUserToCharity(String username, Long charityId) {
+        System.out.println("Calling INIT SERVICE addRoleToUser ==>");
+        User user = userRepository.findUserByUserName(username);
+        Charity charity = charityRepository.findCharityById(charityId);
+        charity.setUser(user);
+        user.getCharityList().add(charity);
+        user.setRoles(user.getRoles());
+    }
+
     // Database initialize logic goes here
 }

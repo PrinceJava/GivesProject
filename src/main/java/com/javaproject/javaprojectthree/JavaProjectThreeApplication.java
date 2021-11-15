@@ -48,9 +48,11 @@ public class JavaProjectThreeApplication {
 			initService.addUserRole("admin","ROLE_RECEIVER");
 			initService.addUserRole("user","ROLE_SENDER");
 			initService.addUserRole("user","ROLE_RECEIVER");
+			initService.addUserRole("raulr","ROLE_SENDER");
 
 			initService.createCharity("Red Cross", "Red Cross goal is to provide to those in need", 1000, 500,true, "https://www.redcross.org/content/dam/redcross/red-cross-logos/American-Red-Cross_Logo_1200x630.jpg");
 
+			initService.addUserToCharity("user",1L);
 		};
 	}
 }

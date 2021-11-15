@@ -7,6 +7,8 @@ import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 
@@ -40,6 +42,9 @@ public class Charity {
 
     @Column
     private String pictureURL;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    private Collection<TransactionLog> donationList = new ArrayList<>();
 
     @ManyToOne
     @JoinColumn(name = "user_id")
