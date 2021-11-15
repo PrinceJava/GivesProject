@@ -2,6 +2,7 @@ package com.javaproject.javaprojectthree.service.impl;
 
 import com.javaproject.javaprojectthree.exception.InformationExistException;
 import com.javaproject.javaprojectthree.model.Charity;
+import com.javaproject.javaprojectthree.model.Credential;
 import com.javaproject.javaprojectthree.model.Role;
 import com.javaproject.javaprojectthree.model.User;
 import com.javaproject.javaprojectthree.repository.CharityRepository;
@@ -57,6 +58,12 @@ public class InitServiceImpl implements InitService {
         user.getRoles().add(role);
         user.setRoles(user.getRoles());
     }
+
+//    @Override
+//    public void addCredentialRole(String access){
+//        System.out.println("Calling INIT Service addCredentials ==>");
+////        Credential credential = addCredentialRole("user");
+//    }
 
     @Override
     public Charity createCharity(String title, String description, double goal, double totalReceived, Boolean verified, String pictureURL) {
