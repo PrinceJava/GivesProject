@@ -2,24 +2,28 @@
 <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, inital-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;300;700&display=swap" rel="stylesheet">
+
     <link th:href="@{styles/index.css}" rel="stylesheet">
+    <link href="../static/styles/index.css" rel="stylesheet">
+    <link th:href="@{styles/general.css}" rel="stylesheet">
+    <link href="../static/styles/general.css" rel="stylesheet">
+
     <title>Gives</title>
 </head>
 <body>
 <header class="header">
-    <img class="logo" alt="gives-logo-photo" th:src="@{images/logoB.jpeg}" />
+    <img class="logo" alt="gives-logo-photo" th:src="@{/images/logoB.jpeg}" />
     <nav class="main-nav">
         <ul class="main-nav-list">
             <li><a class="main-nav-link" href="/users/people">People</a></li>
-            <li><a class="main-nav-link" href="#">Section 2</a></li>
-            <li><a class="main-nav-link" href="#">Section 3</a></li>
-            <li><a class="main-nav-link" href="#">Section 4</a></li>
-            <li><a class="main-nav-link" href="#">Section 5</a></li>
+            <li><a class="main-nav-link" href="#">Charities</a></li>
+            <li><a class="main-nav-link" href="#">Register</a></li>
+            <li><a class="main-nav-link" href="#">Sign In</a></li>
         </ul>
     </nav>
 </header>
