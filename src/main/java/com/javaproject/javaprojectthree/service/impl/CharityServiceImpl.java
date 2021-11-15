@@ -1,6 +1,9 @@
 package com.javaproject.javaprojectthree.service.impl;
 
+import com.javaproject.javaprojectthree.exception.InformationExistException;
 import com.javaproject.javaprojectthree.model.Charity;
+import com.javaproject.javaprojectthree.model.Role;
+import com.javaproject.javaprojectthree.model.User;
 import com.javaproject.javaprojectthree.repository.CharityRepository;
 import com.javaproject.javaprojectthree.service.CharityService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +21,21 @@ public class CharityServiceImpl implements CharityService {
 
     @Override
     public Charity createCharity(String title, String description, double goal, Boolean verified, String user_id, String pictureURL) {
-        return null;
+
+        if (!charityRepository.existsByTitle(title)) {
+
+            Charity newCharity = new Charity();
+            newCharity.setTitle(title);
+            newCharity.setDescription(description);
+            newCharity.setGoal(goal);
+            newCharity.setVerified(false);
+            newCharity.setPictureURL(pictureURL);
+            newCharity.setUser(newCharity.getUser());
+            return charityRepository.save(newCharity);
+        } else {
+            throw new InformationExistException("Charity with the name " +
+                    title + " already exists");
+        }
     }
 
     @Override
@@ -30,4 +47,5 @@ public class CharityServiceImpl implements CharityService {
     public Charity findCharityById(Long id) {
         return charityRepository.findCharityById(id);
     }
+
 }

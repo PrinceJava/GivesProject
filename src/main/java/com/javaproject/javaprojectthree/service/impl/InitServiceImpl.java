@@ -44,5 +44,6 @@ public class InitServiceImpl implements InitService {
         user.setRoles(user.getRoles());
     }
 
+
     // Database initialize logic goes here
 }
