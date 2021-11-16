@@ -1,18 +1,17 @@
 package com.javaproject.javaprojectthree.service.impl;
 
 import com.javaproject.javaprojectthree.exception.InformationExistException;
-import com.javaproject.javaprojectthree.model.Charity;
-import com.javaproject.javaprojectthree.model.Credential;
-import com.javaproject.javaprojectthree.model.Role;
-import com.javaproject.javaprojectthree.model.User;
+import com.javaproject.javaprojectthree.model.*;
 import com.javaproject.javaprojectthree.repository.CharityRepository;
 import com.javaproject.javaprojectthree.repository.RoleRepository;
+import com.javaproject.javaprojectthree.repository.TransactionLogRepository;
 import com.javaproject.javaprojectthree.repository.UserRepository;
 import com.javaproject.javaprojectthree.service.InitService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.LocalDate;
 
 @Service
 @Transactional
@@ -21,6 +20,7 @@ public class InitServiceImpl implements InitService {
     UserRepository userRepository;
     RoleRepository roleRepository;
     CharityRepository charityRepository;
+    TransactionLogRepository transactionLogRepository;
 
     @Autowired
     public void setUserRepository(UserRepository userRepository) {
@@ -37,6 +37,8 @@ public class InitServiceImpl implements InitService {
         this.charityRepository = charityRepository;
     }
 
+    @Autowired
+    public void setTransactionLogRepository(TransactionLogRepository transactionLogRepository){this.transactionLogRepository=transactionLogRepository;}
 
     @Override
     public User addUser(User userObject) {
@@ -86,6 +88,18 @@ public class InitServiceImpl implements InitService {
         charity.setUser(user);
         user.getCharityList().add(charity);
         user.setRoles(user.getRoles());
+    }
+
+    @Override
+    public TransactionLog createTransactionLog(String sender, String receiver, LocalDate date, double amount, String comment) {
+        System.out.println("Calling INIT SERVICE createTransaction ==>");
+        TransactionLog transactionLog = new TransactionLog();
+        transactionLog.setSender(sender);
+        transactionLog.setReceiver(receiver);
+        transactionLog.setDate(LocalDate.now());
+        transactionLog.setAmount(amount);
+        transactionLog.setComment(comment);
+        return transactionLogRepository.save(transactionLog);
     }
 
     // Database initialize logic goes here
