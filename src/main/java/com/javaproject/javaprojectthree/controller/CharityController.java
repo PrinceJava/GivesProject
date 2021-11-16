@@ -1,14 +1,14 @@
 package com.javaproject.javaprojectthree.controller;
 
 import com.javaproject.javaprojectthree.model.Charity;
+import com.javaproject.javaprojectthree.model.forms.LoginRequest;
+import com.javaproject.javaprojectthree.model.forms.RegisterForm;
 import com.javaproject.javaprojectthree.service.CharityService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -42,6 +42,18 @@ public class CharityController {
             @PathVariable(value = "charityId") Long charityId,
             Model model){
         model.addAttribute("charity",charityService.findCharityById(charityId));
+        model.addAttribute("transactions", charityService.findAllTransactionsByCharityId(charityId));
         return "charity";
+    }
+
+    @GetMapping("/register")
+    public String createCharity(){
+        return "registerCharity";
+    }
+
+    @PostMapping("/register")
+    public ResponseEntity<?> registerCharity(RegisterForm registerForm){
+        System.out.println("Controller is calling loginUser ===>");
+        return charityService.createCharity(registerForm);
     }
 }

@@ -59,4 +59,13 @@ public class Charity {
         this.verified = verified;
         this.pictureURL = pictureURL;
     }
+    public Charity (String title, String description, double goal, double totalReceived, Boolean verified, String pictureURL, User user){
+        this.title = title;
+        this.description = description;
+        this.goal = goal;
+        this.totalReceived = totalReceived;
+        this.verified = verified;
+        this.pictureURL = pictureURL;
+        this.setUser(user);
+    }
 }

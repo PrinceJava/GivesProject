@@ -73,6 +73,8 @@ public class JavaProjectThreeApplication {
 
 			initService.addUserToCharity("user",1L);
 
+			initService.createTransactionLog("raulr","Red Cross",null,1000,"Donating for a good cause");
+
 		};
 	}
 }
