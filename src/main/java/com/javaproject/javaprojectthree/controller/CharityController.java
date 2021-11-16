@@ -118,6 +118,6 @@ public class CharityController {
             @PathVariable(value = "charityId") Long charityId,
             Model model){
         model.addAttribute("charity",charityService.findCharityById(charityId));
-        return "checkout.jsp";
+        return "checkout.html";
     }
 }
