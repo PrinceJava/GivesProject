@@ -1,36 +1,25 @@
-<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;300;700&display=swap" rel="stylesheet">
-
-    <link th:href="@{styles/index.css}" rel="stylesheet">
-    <link href="../static/styles/index.css" rel="stylesheet">
-    <link th:href="@{styles/general.css}" rel="stylesheet">
-    <link href="../static/styles/general.css" rel="stylesheet">
-
-    <title>Gives</title>
+    <meta charset="UTF-8">
+    <title>Log In</title>
+    <style type="text/css">
+        table{border: 0}
+        table td {padding: 10px}
+    </style>
 </head>
 <body>
-<header class="header">
-    <img class="logo" alt="gives-logo-photo" th:src="@{/images/logoB.jpeg}" />
-</header>
-
-<main>
-<section class="gives">
-    <form action="login" method="post">
+<div id="checkoutDIV" align="center">
+    <h1>Log In</h1>
+    <form action="login_user" method="post">
         <table>
             <tr>
                 <td>Username:</td>
-                <td><input type="text" name="userName" placeholder="username"/></td>
+                <td><input type="text" name="email" placeholder="email"/></td>
             </tr>
             <tr>
                 <td>Password</td>
-                <td><input type="password" name="password" placeholder="password"/></td>
+                <td><input type="password" name="password" placeholder="password" /></td>
             </tr>
             <tr>
                 <td colspan="2" align="center">
@@ -39,8 +28,6 @@
             </tr>
         </table>
     </form>
-</section>
-</main>
-
+</div>
 </body>
 </html>

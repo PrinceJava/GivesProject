@@ -11,7 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/api")
+@RequestMapping("/")
 public class AuthenticationController {
 
     private UserService userService;
@@ -19,7 +19,7 @@ public class AuthenticationController {
     @Autowired
     public void setUserService(UserService userService){this.userService = userService;}
 
-    @GetMapping("/login")
+    @GetMapping("login")
     public String userLogin(){
         return "login";
     }
@@ -34,7 +34,7 @@ public class AuthenticationController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> loginUser(@RequestBody LoginRequest loginRequest){
+    public ResponseEntity<?> loginUser(LoginRequest loginRequest){
         System.out.println("Controller is calling loginUser ===>");
         return userService.loginUser(loginRequest);
     }
