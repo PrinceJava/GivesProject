@@ -8,9 +8,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;300;700&display=swap" rel="stylesheet">
 
-    <link th:href="@{styles/index.css}" rel="stylesheet">
+    <link th:href="@{/styles/index.css}" rel="stylesheet">
     <link href="../static/styles/index.css" rel="stylesheet">
-    <link th:href="@{styles/general.css}" rel="stylesheet">
+    <link th:href="@{/styles/general.css}" rel="stylesheet">
     <link href="../static/styles/general.css" rel="stylesheet">
 
     <title>Gives</title>
@@ -31,66 +31,47 @@
 <main>
 <section class="section-gives">
     <div class="gives">
+        <div class="gives-image-box charity-box-one">
+            <h1 class="heading-primary" th:text="${charity.title}"></h1>
+            <img th:src="${charity.pictureURL}" alt="" class="gives-home-img">
+        </div>
         <div class="gives-text-box">
-            <h1 class="heading-primary">Lending a helping hand with Gives</h1>
-                <p class="gives-description">
-            In a world where everyone helps each other, is a world I would like to live in.
-            Gives goal is to support those supporting others.
-                </p>
-            <a href="#" class="btn btn--full">Start Donating!</a>
-            <a href="#" class="btn btn--outline">Learn More &darr;</a>
-        </div>
-        <div class="gives-image-box">
-            <img th:src="@{images/Home.png}" alt="" class="gives-home-img">
+                <p class="gives-description" th:text="${charity.description}"></p>
+            <a href="#" class="btn btn--full">Donate</a>
         </div>
     </div>
 </section>
-<section class="section-how">
-    <div class="container">
-        <span class="subheading">How it works</span>
-        <h2 class="heading-second">Donate in 3 simple steps</h2>
-    </div>
-
-    <div class="container grid grid--2-cols">
-        <div class="step-text-box">
-            <p class="step-number">01</p>
-            <h3 class="heading-tertiary"> Search up your favorite charity/cause </h3>
-            <p class="step-description">
-                With Gives, you only need to search up your favorite charity or cause.
-                Once you have selected feel free to review previous comments and donations, as well as a description of the charity or cause as well as their goal.
-            </p>
-        </div>
-        <div class="step-img-box">
-            <img th:src="@{images/magnifying-glass-gdd6bb1c64_640.jpg}" alt="search your charity"
-                 class="step-image"/>
-        </div>
-        <div class="step-img-box">
-            <img th:src="@{images/donate-g421752fb3_640.png}" alt="donate to your charity"
-                 class="step-image"/>
-        </div>
-        <div class="step-text-box">
-            <p class="step-number">02</p>
-            <h3 class="heading-tertiary"> Use PayPal to donate </h3>
-            <p class="step-description">
-                Once you have found the charity or because you want to donate too, login to PayPal or checkout as a guest.
-                When the transaction is completed, your account will be authorized for your selected amount until the charity collects those funds.
-            </p>
-        </div>
-        <div class="step-text-box">
-            <p class="step-number">03</p>
-            <h3 class="heading-tertiary"> Keep watching your charity until they reach their goal </h3>
-            <p class="step-description">
-                You can see your charity or causes progress to completing their goal
-            </p>
-        </div>
-        <div class="step-img-box">
-            <img th:src="@{images/hourglass-gffca7f5d6_640.png}" alt="donate to your charity"
-                 class="step-image"/>
+<section class="section-gives">
+    <div align="center">
+        <h1>Charities List</h1>
+        <table border="1">
+            <thead>
+            <tr>
+                <th>Sender</th>
+                <th>Comment</th>
+                <th>Amount</th>
+                <th>Date</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="transaction : ${transactions}">
+                <td><img class="logo" th:src="${transaction.sender}"/></td>
+                <td th:text="${transaction.comment}"></td>
+                <td th:text="${transaction.amount}"></td>
+                <td th:text="${transaction.date}"></td>
+            </tr>
+            </tbody>
+        </table>
+        <div>
+            <span th:if="${hasPrev}"><a th:href="@{/charities?page={prev}(prev=${prev})}">Prev</a>&nbsp;&nbsp;&nbsp;</span>
+            <span th:if="${hasNext}"><a th:href="@{/charities?page={next}(next=${next})}">Next</a></span>
         </div>
     </div>
-
 </section>
-</main>
+
+
+    </main>
+
 
 </body>
 </html>

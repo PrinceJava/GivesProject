@@ -42,6 +42,7 @@ public class CharityController {
             @PathVariable(value = "charityId") Long charityId,
             Model model){
         model.addAttribute("charity",charityService.findCharityById(charityId));
+        model.addAttribute("transactions", charityService.findAllTransactionsByCharityId(charityId));
         return "charity";
     }
 }

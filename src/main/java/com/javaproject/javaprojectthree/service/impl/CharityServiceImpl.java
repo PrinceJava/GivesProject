@@ -3,8 +3,10 @@ package com.javaproject.javaprojectthree.service.impl;
 import com.javaproject.javaprojectthree.exception.InformationExistException;
 import com.javaproject.javaprojectthree.model.Charity;
 import com.javaproject.javaprojectthree.model.Role;
+import com.javaproject.javaprojectthree.model.TransactionLog;
 import com.javaproject.javaprojectthree.model.User;
 import com.javaproject.javaprojectthree.repository.CharityRepository;
+import com.javaproject.javaprojectthree.repository.TransactionLogRepository;
 import com.javaproject.javaprojectthree.service.CharityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -22,6 +24,9 @@ public class CharityServiceImpl implements CharityService {
 
     @Autowired
     CharityRepository charityRepository;
+
+    @Autowired
+    TransactionLogRepository transactionLogRepository;
 
     @Override
     public Charity createCharity(String title, String description, double goal, double totalReceived, Boolean verified, String pictureURL) {
@@ -60,5 +65,11 @@ public class CharityServiceImpl implements CharityService {
     @Override
     public int count() {
         return (int) charityRepository.count();
+    }
+
+    @Override
+    public List<TransactionLog> findAllTransactionsByCharityId(Long charityId) {
+        Charity charity = charityRepository.findCharityById(charityId);
+        return transactionLogRepository.findAllByReceiver(charity.getTitle());
     }
 }

@@ -1,6 +1,7 @@
 package com.javaproject.javaprojectthree.service;
 
 import com.javaproject.javaprojectthree.model.Charity;
+import com.javaproject.javaprojectthree.model.TransactionLog;
 
 import java.util.List;
 
@@ -9,4 +10,5 @@ public interface CharityService {
     List<Charity> findAllCharities(int pageNumber, int rowPerPage);
     Charity findCharityById(Long id);
     int count();
+    List<TransactionLog> findAllTransactionsByCharityId(Long charityId);
 }

@@ -21,9 +21,6 @@ public class TransactionLog {
     private Long id;
 
     @Column
-    private String title;
-
-    @Column
     private String sender;
 
     @Column
@@ -32,6 +29,17 @@ public class TransactionLog {
     @Column
     private LocalDate date;
 
+    @Column
+    private double amount;
+
     @Column(columnDefinition = "TEXT")
     private String comment;
+
+    public TransactionLog(String sender, String receiver, LocalDate date, double amount, String comment){
+        this.sender = sender;
+        this.receiver = receiver;
+        this.date = date;
+        this.amount = amount;
+        this.comment = comment;
+    }
 }
