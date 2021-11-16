@@ -28,15 +28,7 @@ public class JavaProjectThreeApplication {
 	private UserRepository userRepository;
 	@Autowired
 	public void setUserRepository(UserRepository userRepository){this.userRepository = userRepository;}
-
-	private CharityRepository charityRepository;
-	@Autowired
-	public void setCharityRepository(CharityRepository charityRepository){this.charityRepository = charityRepository;}
-
-	private CredentialRepository credentialRepository;
-	@Autowired
-	public void setCredentialsRepository(CredentialRepository credentialsRepository){this.credentialRepository = credentialsRepository;}
-
+	
 	@Bean
 	CommandLineRunner run(InitService initService) {
 		return args -> {
@@ -72,8 +64,6 @@ public class JavaProjectThreeApplication {
 			initService.createCharity("DonorsChoose.org", "Engages the public in public schools by giving people a simple, accountable and personal way to address educational inequity; envisions a nation where children in every community have the tools and experiences needed for an excellent education.", 600000, 550000, true, "https://upload.wikimedia.org/wikipedia/commons/e/ee/DonorsChoose-Logo.png");
 
 			initService.addUserToCharity("user",1L);
-
-			initService.createTransactionLog("raulr","Red Cross",null,1000,"Donating for a good cause");
 
 		};
 	}
