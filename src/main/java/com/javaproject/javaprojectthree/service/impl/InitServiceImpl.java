@@ -1,8 +1,6 @@
 package com.javaproject.javaprojectthree.service.impl;
 
-import com.javaproject.javaprojectthree.exception.InformationExistException;
 import com.javaproject.javaprojectthree.model.Charity;
-import com.javaproject.javaprojectthree.model.Credential;
 import com.javaproject.javaprojectthree.model.Role;
 import com.javaproject.javaprojectthree.model.User;
 import com.javaproject.javaprojectthree.repository.CharityRepository;
