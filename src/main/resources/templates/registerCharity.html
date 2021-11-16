@@ -2,40 +2,28 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Check Out</title>
+    <title>Log In</title>
     <style type="text/css">
         table{border: 0}
         table td {padding: 10px}
     </style>
 </head>
 <body>
-<div id="registerCharityDiv" align="center">
-    <h1>Check Out</h1>
-    <form action="register_charity" method="post">
+<div id="loginDiv" align="center">
+    <h1>Register Charity</h1>
+    <form action="login_users" method="post">
         <table>
             <tr>
-                <td>Title:</td>
-                <td><input type="test" name="title" placeholder="Title"/></td>
+                <td>Username:</td>
+                <td><input type="text" name="email" placeholder="email"/></td>
             </tr>
             <tr>
-                <td>Description</td>
-                <td><input type="text" name="description" placeholder="description" /></td>
-            </tr>
-            <tr>
-                <td>Goal</td>
-                <td><input type="number" name="goal" placeholder="0.00" /></td>
-            </tr>
-            <tr>
-                <td>Logo Picture URL</td>
-                <td><input type="text" name="pictureURL" placeholder="Charity Logo URL" /></td>
-            </tr>
-            <tr>
-                <td>Organizer</td>
-                <td><input type="text" name="user_id" placeholder="organizer name"/></td>
+                <td>Password</td>
+                <td><input type="password" name="password" placeholder="password" /></td>
             </tr>
             <tr>
                 <td colspan="2" align="center">
-                    <input type="submit" value="Register" />
+                    <input type="submit" value="Login" />
                 </td>
             </tr>
         </table>

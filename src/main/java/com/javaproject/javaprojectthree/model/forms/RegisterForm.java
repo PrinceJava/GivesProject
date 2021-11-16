@@ -1,13 +1,14 @@
 package com.javaproject.javaprojectthree.model.forms;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
+@AllArgsConstructor
 public class RegisterForm {
-    private String firstName;
-    private String lastName;
-    private String userName;
-    private String emailAddress;
-    private String password;
-    private String role;
+    private String title;
+    private String description;
+    private double goal;
+    private String pictureURL;
+    private String username;
 }

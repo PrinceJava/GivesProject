@@ -1,8 +1,11 @@
 package com.javaproject.javaprojectthree.controller;
 
 import com.javaproject.javaprojectthree.model.Charity;
+import com.javaproject.javaprojectthree.model.forms.LoginRequest;
+import com.javaproject.javaprojectthree.model.forms.RegisterForm;
 import com.javaproject.javaprojectthree.service.CharityService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -49,8 +52,8 @@ public class CharityController {
     }
 
     @PostMapping("/register")
-    public String registerCharity(Charity charity){
-        Charity createdCharity = charityService.createCharity(charity.getTitle(),charity.getDescription(), charity.getGoal(), charity.getTotalReceived(), charity.getVerified(), charity.getPictureURL());
-        return ("/charities/" + createdCharity.getId());
+    public ResponseEntity<?> registerCharity(RegisterForm registerForm){
+        System.out.println("Controller is calling loginUser ===>");
+        return charityService.createCharity(registerForm);
     }
 }
