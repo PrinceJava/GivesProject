@@ -1,3 +1,6 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ page language="java" contentType="text/html; ISO-8859-1" %>
+
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
@@ -34,7 +37,11 @@
                 <td>Total</td>
                 <td><input type="text" name="total" value="120"/></td>
             </tr>
+            <input type="hidden" name="paymentId" value="${charityId}"/>
             <tr>
+                <td>
+                    <input type="hidden" >
+                </td>
             </tr>
             <tr>
                 <td colspan="2" align="center">

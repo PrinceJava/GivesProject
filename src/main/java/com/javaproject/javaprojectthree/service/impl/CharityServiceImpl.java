@@ -20,6 +20,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.thymeleaf.util.StringUtils;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
@@ -98,13 +99,6 @@ public class CharityServiceImpl implements CharityService {
         return charityRepository.findCharityById(id);
     }
 
-    @Override
-    public int count() {
-        return (int) charityRepository.count();
-    }
-
-
-
     public void deleteCharity(Long charityId){
         System.out.println("Service calling deleteCharity ==>");
         Optional<Charity> charity = charityRepository.findById(charityId);
@@ -143,6 +137,39 @@ public class CharityServiceImpl implements CharityService {
     public List<TransactionLog> findAllTransactionsByCharityId(Long charityId) {
         Charity charity = charityRepository.findCharityById(charityId);
         return transactionLogRepository.findAllByReceiver(charity.getTitle());
+    }
+
+    @Override
+    public Charity save(Charity charity) throws InformationNotFoundException, InformationExistException {
+        if (!StringUtils.isEmpty(charity.getTitle())) {
+            if (charity.getId() != null && charityRepository.existsByTitle(charity.getTitle())) {
+                throw new InformationExistException("Charity with id: " + charity.getId() +
+                        " already exists");
+            }
+            return charityRepository.save(charity);
+        }
+        else {
+            throw new InformationNotFoundException("Failed to save contact");
+        }
+    }
+
+    @Override
+    public void update(Charity charity)
+            throws InformationNotFoundException, InformationExistException {
+        if (!StringUtils.isEmpty(charity.getTitle())) {
+            if (!charityRepository.existsByTitle(charity.getTitle())) {
+                throw new InformationNotFoundException("Cannot find Contact with id: " + charity.getId());
+            }
+            charityRepository.save(charity);
+        }
+        else {
+            throw new InformationNotFoundException("Failed to save contact");
+        }
+    }
+
+    @Override
+    public Charity findById(long charityId) {
+        return charityRepository.findCharityById(charityId);
     }
 
 }

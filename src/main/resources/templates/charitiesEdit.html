@@ -1,97 +1,68 @@
-<html lang="en" xmlns:th="https://www.thymeleaf.org"
-xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;300;700&display=swap" rel="stylesheet">
-
-    <link th:href="@{/styles/index.css}" rel="stylesheet">
-    <link href="../static/styles/index.css" rel="stylesheet">
-    <link th:href="@{/styles/general.css}" rel="stylesheet">
-    <link href="../static/styles/general.css" rel="stylesheet">
-
-    <title>Gives</title>
+    <title th:text="${add} ? 'Create a Charity' : 'Edit a Charity'"></title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
 </head>
 <body>
-<header class="header">
-    <img class="logo" alt="gives-logo-photo" th:src="@{/images/logoB.jpeg}" />
-    <nav class="main-nav">
-        <ul class="main-nav-list">
-            <li><a class="main-nav-link" href="/admin" sec:authorize="hasRole('ROLE_ADMIN')">ADMIN</a> </li>
-            <li><a class="main-nav-link" href="/users/people">People</a></li>
-            <li><a class="main-nav-link" href="/charities/">Charities</a></li>
-            <li><a class="main-nav-link" href="/charities/register">Register</a></li>
-            <li>
-                <a sec:authorize="isAuthenticated()" class="main-nav-link" href="#">Log Out</a>
-                <a sec:authorize="isAnonymous()" class="main-nav-link" th:href="@{~/login}">Sign In</a>
-            </li>
-        </ul>
-    </nav>
-</header>
+<h1 th:text="${add} ? 'Create a Charity:' : 'Edit a Charity:'"></h1>
+<a th:href="@{/charities/}">Back to Charities List</a>
+<br/><br/>
+<form th:action="${add} ? @{/charities/add} : @{/contacts/{contactId}/edit(contactId=${contact.id})}"
+      th:object="${charity}" method="POST">
+    <table border="0">
+        <tr th:if="${charity.id}">
+            <td>ID</td>
+            <td>:</td>
+            <td th:utext="${charity.id}">...</td>
+        </tr>
+        <tr>
+            <td>Title</td>
+            <td>:</td>
+            <td><input type="text" th:field="*{title}" /></td>
+        </tr>
+        <tr>
+            <td>Goal</td>
+            <td>:</td>
+            <td><input type="number" th:field="*{goal}" /></td>
+        </tr>
+        <tr>
+            <td>PictureURL</td>
+            <td>:</td>
+            <td><input type="text" th:field="*{pictureURL}" /></td>
+        </tr>
+        <tr>
+            <td>Organizer</td>
+            <td>:</td>
+            <td><input type="text" placeholder="email" th:field="${user.emailAddress}" size="50" /></td>
+        </tr>
+<!--        <tr>-->
+<!--            <td></td>-->
+<!--            <td></td>-->
+<!--            <td><input type="text" th:field="*{address2}" size="50" /></td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--            <td></td>-->
+<!--            <td></td>-->
+<!--            <td><input type="text" th:field="*{address3}" size="50" /></td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--            <td>Postal Code</td>-->
+<!--            <td>:</td>-->
+<!--            <td><input type="text" th:field="*{postalCode}" /></td>-->
+<!--        </tr>-->
+        <tr>
+            <td>Description</td>
+            <td>:</td>
+            <td><textarea th:field="*{description}" rows="4" cols="50"></textarea></td>
+        </tr>
+    </table>
+    <input type="submit" th:value="${add} ? 'Create' : 'Update'" />
+</form>
 
-<main>
-<section class="section-gives">
-    <div class="gives">
-        <div class="gives-text-box">
-            <h1 class="heading-primary">Lending a helping hand with Gives</h1>
-                <p class="gives-description">
-            In a world where everyone helps each other, is a world I would like to live in.
-            Gives goal is to support those supporting others.
-                </p>
-            <a href="#" class="btn btn--full">Start Donating!</a>
-            <a href="#" class="btn btn--outline">Learn More &darr;</a>
-        </div>
-        <div class="gives-image-box">
-            <img th:src="@{images/Home.png}" alt="" class="gives-home-img">
-        </div>
-    </div>
-</section>
-<section class="section-how">
-    <div class="container">
-        <span class="subheading">How it works</span>
-        <h2 class="heading-second">Donate in 3 simple steps</h2>
-    </div>
-        <div class="step-text-box">
-            <p class="step-number">01</p>
-            <h3 class="heading-tertiary"> Search up your favorite charity/cause </h3>
-            <p class="step-description">
-                With Gives, you only need to search up your favorite charity or cause.
-                Once you have selected feel free to review previous comments and donations, as well as a description of the charity or cause as well as their goal.
-            </p>
-        </div>
-        <div class="step-img-box">
-            <img th:src="@{images/magnifying-glass-gdd6bb1c64_640.jpg}" alt="search your charity"
-                 class="step-image"/>
-        </div>
-        <div class="step-img-box">
-            <img th:src="@{images/donate-g421752fb3_640.png}" alt="donate to your charity"
-                 class="step-image"/>
-        </div>
-        <div class="step-text-box">
-            <p class="step-number">02</p>
-            <h3 class="heading-tertiary"> Use PayPal to donate </h3>
-            <p class="step-description">
-                Once you have found the charity or because you want to donate too, login to PayPal or checkout as a guest.
-                When the transaction is completed, your account will be authorized for your selected amount until the charity collects those funds.
-            </p>
-        </div>
-        <div class="step-text-box">
-            <p class="step-number">03</p>
-            <h3 class="heading-tertiary"> Keep watching your charity until they reach their goal </h3>
-            <p class="step-description">
-                You can see your charity or causes progress to completing their goal
-            </p>
-        </div>
-        <div class="step-img-box">
-            <img th:src="@{images/hourglass-gffca7f5d6_640.png}" alt="donate to your charity"
-                 class="step-image"/>
-        </div>
-</section>
-</main>
-
+<br/>
+<!-- Check if errorMessage is not null and not empty -->
+<div th:if="${errorMessage}" th:utext="${errorMessage}" class="error"></div>
 </body>
 </html>
