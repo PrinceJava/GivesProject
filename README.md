@@ -26,9 +26,39 @@ keep track of that goal as they receive payments.
 
 ## Original Entity Relationship Diagram (ERD):
 
-![img.png](img.png)
+![img.png](images/imgErd1.png)
 
 ## Final Entity Relationship Diagram (ERD):
+
+
+##Endpoints
+
+
+##System Tools Used
+
+
+##User Stories
+| | 
+|:---|
+|1.	As a user, I would like to view a list of charities.
+|2.	As a user, I would like to view details of a specific charity.
+|3.	As a user, I would like to donate to any charity I choose.
+|4.	As a user, I would like to log in.
+|5.	As a user, I would like to donate without login in.
+|6.	As a user, I would like to use my PayPal account to donate.
+|7.	As a user, I would like to create a charity.
+|8.	As a user, I would like to delete my charity.
+|9.	As a user, I would like to update my charity.
+|10. As a user, I would like to set fundraising goal.
+|11. As a user, I would like to keep track of a fundraising total.
+|12. A user can have an admin role or user role. 
+
+##Project Challenges
+
+![img_4.png](img_4.png)
+
+1. 
+
 
 
 
