@@ -23,7 +23,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
         <ul class="main-nav-list">
             <li><a class="main-nav-link" href="/admin" sec:authorize="hasRole('ROLE_ADMIN')">ADMIN</a> </li>
             <li><a class="main-nav-link" href="/users/people">People</a></li>
-            <li><a class="main-nav-link" href="#">Charities</a></li>
+            <li><a class="main-nav-link" href="/charities/">Charities</a></li>
             <li><a class="main-nav-link" href="#">Register</a></li>
             <li>
                 <a sec:authorize="isAuthenticated()" class="main-nav-link" href="#">Log Out</a>
