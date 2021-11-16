@@ -1,11 +1,13 @@
 package com.javaproject.javaprojectthree.controller;
 
+import com.javaproject.javaprojectthree.exception.InformationNotFoundException;
 import com.javaproject.javaprojectthree.model.Charity;
-import com.javaproject.javaprojectthree.model.forms.LoginRequest;
-import com.javaproject.javaprojectthree.model.forms.RegisterForm;
+import com.javaproject.javaprojectthree.model.User;
 import com.javaproject.javaprojectthree.service.CharityService;
+import com.javaproject.javaprojectthree.service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -16,24 +18,20 @@ import java.util.List;
 @RequestMapping("/charities")
 public class CharityController {
 
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
     int ROW_PER_PAGE = 5;
 
     @Autowired
     CharityService charityService;
 
+    @Autowired
+    UserService userService;
+
     @GetMapping("/")
-    public String getCharities(Model model,
-                               @RequestParam(value = "page", defaultValue = "1") int pageNumber) {
-        //List<Charity> charities = charityService.findAllCharities(pageNumber, ROW_PER_PAGE);
+    public String getCharities(Model model) {
         List<Charity> charities = charityService.findAllCharities();
-//        int count = charityService.count();
-//        boolean hasPrev = pageNumber > 1;
-//        boolean hasNext = (pageNumber * ROW_PER_PAGE) < count;
           model.addAttribute("charities",charities);
-//        model.addAttribute("hasPrev",hasPrev);
-//        model.addAttribute("prev", pageNumber - 1);
-//        model.addAttribute("hasNext",hasNext);
-//        model.addAttribute("next",pageNumber + 1);
         return "charities";
     }
 
@@ -46,14 +44,69 @@ public class CharityController {
         return "charity";
     }
 
-    @GetMapping("/register")
-    public String createCharity(){
-        return "registerCharity";
+    @GetMapping(value = {"/add"})
+    public String showAddContact(Model model) {
+        Charity charity = new Charity();
+        User user = new User();
+        model.addAttribute("add", true);
+        model.addAttribute("charity", charity);
+        model.addAttribute("user",user);
+
+        return "charitiesEdit";
     }
 
-    @PostMapping("/register")
-    public ResponseEntity<?> registerCharity(RegisterForm registerForm){
-        System.out.println("Controller is calling loginUser ===>");
-        return charityService.createCharity(registerForm);
+    @PostMapping(value = "/add")
+    public String addContact(Model model,
+                             @ModelAttribute("charity") Charity charity,
+                             @ModelAttribute("user") User user) {
+        User newUser = userService.findUserByEmailAddress(user.getEmailAddress());
+        charity.setUser(newUser);
+        try {
+            Charity newCharity = charityService.save(charity);
+            return "redirect:/charities/" + newCharity.getId();
+        } catch (Exception ex) {
+            // log exception first,
+            // then show error
+            String errorMessage = ex.getMessage();
+            logger.error(errorMessage);
+            model.addAttribute("errorMessage", errorMessage);
+
+            //model.addAttribute("contact", contact);
+            model.addAttribute("add", true);
+            return "charitiesEdit";
+        }
+    }
+
+    @GetMapping(value = {"/charities/{charityId}/edit"})
+    public String showEditCharity(Model model, @PathVariable long charityId) {
+        Charity charity = null;
+        try {
+            charity = charityService.findById(charityId);
+        } catch (InformationNotFoundException ex) {
+            model.addAttribute("errorMessage", "Contact not found");
+        }
+        model.addAttribute("add", false);
+        model.addAttribute("charity", charity);
+        return "charitiesEdit";
+    }
+
+    @PostMapping(value = {"/charities/{charityId}/edit"})
+    public String updateCharity(Model model,
+                                @PathVariable long charityId,
+                                @ModelAttribute("charity") Charity charity) {
+        try {
+            charity.setId(charityId);
+            charityService.update(charity);
+            return "redirect:/charities/" + charity.getId();
+        } catch (Exception ex) {
+            // log exception first,
+            // then show error
+            String errorMessage = ex.getMessage();
+            logger.error(errorMessage);
+            model.addAttribute("errorMessage", errorMessage);
+
+            model.addAttribute("add", false);
+            return "charitiesEdit";
+        }
     }
 }
