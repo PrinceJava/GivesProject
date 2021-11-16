@@ -31,13 +31,30 @@ keep track of that goal as they receive payments.
 ## Final Entity Relationship Diagram (ERD):
 
 
+
+##POM Dependencies
+
 ##Endpoints
+
 
 
 ##System Tools Used
 
+|  |  |
+| --- | :--- |
+| ![img_5.png](img_5.png) | Spring Boot 
+| ![img_7.png](img_7.png) | Postman
+|![img_8.png](img_8.png)  | Json Web Tokens
+|![img_6.png](img_6.png)  | IntelliJ IDEA 17
+|![img_9.png](img_9.png) | Postgres
+|![img_10.png](img_10.png) | LucidApp
+|![img_12.png](img_12.png) |Thymeleaf
+|![img_14.png](img_14.png) |GitHub Branching
 
 ##User Stories
+
+![img_16.png](img_16.png)
+
 | | 
 |:---|
 |1.	As a user, I would like to view a list of charities.
@@ -57,8 +74,13 @@ keep track of that goal as they receive payments.
 
 ![img_4.png](img_4.png)
 
-1. 
+1. Using a single Github repository proved to be challenging; however, after some research we
+    were able to 
 
+3. The first coding challenge we faced was creating a user with login credentials using JWT. We realized 
+the error was in our coding as the JWTUtils did not have the correct parameters in our class regarding
+Secret Key. Once this was corrected, we were able to generate a JWT Token for an admin and a user. 
 
+4. Another challenge that appeared 
 
 
