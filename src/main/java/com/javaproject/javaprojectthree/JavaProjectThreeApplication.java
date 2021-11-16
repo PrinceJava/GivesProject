@@ -3,6 +3,7 @@ package com.javaproject.javaprojectthree;
 import com.javaproject.javaprojectthree.model.Role;
 import com.javaproject.javaprojectthree.model.User;
 import com.javaproject.javaprojectthree.repository.CharityRepository;
+import com.javaproject.javaprojectthree.repository.CredentialRepository;
 import com.javaproject.javaprojectthree.repository.UserRepository;
 import com.javaproject.javaprojectthree.service.InitService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,10 +28,6 @@ public class JavaProjectThreeApplication {
 	private UserRepository userRepository;
 	@Autowired
 	public void setUserRepository(UserRepository userRepository){this.userRepository = userRepository;}
-
-	private CharityRepository charityRepository;
-	@Autowired
-	public void setCharityRepository(CharityRepository charityRepository){this.charityRepository = charityRepository;}
 	
 	@Bean
 	CommandLineRunner run(InitService initService) {

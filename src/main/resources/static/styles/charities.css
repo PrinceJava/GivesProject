@@ -1,0 +1,16 @@
+.charity {
+    max-width: 130rem;
+    margin: 0 auto;
+    padding: 0 3.2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4.2rem;
+    align-items: center;
+
+}
+.gives-image-box,
+.charity-box-one {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}

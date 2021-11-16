@@ -9,9 +9,9 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;300;700&display=swap" rel="stylesheet">
 
-    <link th:href="@{styles/index.css}" rel="stylesheet">
+    <link th:href="@{/styles/index.css}" rel="stylesheet">
     <link href="../static/styles/index.css" rel="stylesheet">
-    <link th:href="@{styles/general.css}" rel="stylesheet">
+    <link th:href="@{/styles/general.css}" rel="stylesheet">
     <link href="../static/styles/general.css" rel="stylesheet">
 
     <title>Gives</title>
@@ -55,8 +55,6 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
         <span class="subheading">How it works</span>
         <h2 class="heading-second">Donate in 3 simple steps</h2>
     </div>
-
-    <div class="container grid grid--2-cols">
         <div class="step-text-box">
             <p class="step-number">01</p>
             <h3 class="heading-tertiary"> Search up your favorite charity/cause </h3>
@@ -92,8 +90,6 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
             <img th:src="@{images/hourglass-gffca7f5d6_640.png}" alt="donate to your charity"
                  class="step-image"/>
         </div>
-    </div>
-
 </section>
 </main>
 
