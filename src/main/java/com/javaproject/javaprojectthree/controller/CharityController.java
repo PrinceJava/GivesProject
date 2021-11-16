@@ -24,16 +24,16 @@ public class CharityController {
     @GetMapping("/")
     public String getCharities(Model model,
                                @RequestParam(value = "page", defaultValue = "1") int pageNumber) {
-        List<Charity> charities = charityService.findAllCharities(pageNumber, ROW_PER_PAGE);
-
-        int count = charityService.count();
-        boolean hasPrev = pageNumber > 1;
-        boolean hasNext = (pageNumber * ROW_PER_PAGE) < count;
-        model.addAttribute("charities",charities);
-        model.addAttribute("hasPrev",hasPrev);
-        model.addAttribute("prev", pageNumber - 1);
-        model.addAttribute("hasNext",hasNext);
-        model.addAttribute("next",pageNumber + 1);
+        //List<Charity> charities = charityService.findAllCharities(pageNumber, ROW_PER_PAGE);
+        List<Charity> charities = charityService.findAllCharities();
+//        int count = charityService.count();
+//        boolean hasPrev = pageNumber > 1;
+//        boolean hasNext = (pageNumber * ROW_PER_PAGE) < count;
+          model.addAttribute("charities",charities);
+//        model.addAttribute("hasPrev",hasPrev);
+//        model.addAttribute("prev", pageNumber - 1);
+//        model.addAttribute("hasNext",hasNext);
+//        model.addAttribute("next",pageNumber + 1);
         return "charities";
     }
 

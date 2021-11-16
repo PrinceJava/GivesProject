@@ -83,6 +83,9 @@ public class CharityServiceImpl implements CharityService {
         charityRepository.findAll(sortedByIdAsc).forEach(contacts::add);
         return contacts;
     }
+    public List<Charity> findAllCharities(){
+        return charityRepository.findAll();
+    }
 
     @Override
     public Charity findCharityById(Long id) {

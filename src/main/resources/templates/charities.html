@@ -23,7 +23,7 @@
             <li><a class="main-nav-link" href="/users/people">People</a></li>
             <li><a class="main-nav-link" href="/charities/all">Charities</a></li>
             <li><a class="main-nav-link" href="/charities/register">Register</a></li>
-            <li><a class="main-nav-link" href="#">Sign In</a></li>
+            <li><a class="main-nav-link" href="/login">Sign In</a></li>
         </ul>
     </nav>
 </header>
@@ -48,17 +48,17 @@
                     <tbody>
                     <tr th:each="Charity : ${charities}">
                         <td><img class="logo" th:src="${Charity.pictureURL}"/></td>
-                        <td th:text="${Charity.title}"></td>
+                        <td><a th:href="@{/charities/{charityId}(charityId=${Charity.id})}" th:text="${Charity.title}"</td>
                         <td th:text="${Charity.goal}"></td>
                         <td th:text="${Charity.totalReceived}"></td>
                         <td th:text="${Charity.verified}"></td>
                     </tr>
                     </tbody>
                 </table>
-                <div>
-                    <span th:if="${hasPrev}"><a th:href="@{/charities?page={prev}(prev=${prev})}">Prev</a>&nbsp;&nbsp;&nbsp;</span>
-                    <span th:if="${hasNext}"><a th:href="@{/charities?page={next}(next=${next})}">Next</a></span>
-                </div>
+<!--                <div>-->
+<!--                    <span th:if="${hasPrev}"><a th:href="@{/charities?page={prev}(prev=${prev})}">Prev</a>&nbsp;&nbsp;&nbsp;</span>-->
+<!--                    <span th:if="${hasNext}"><a th:href="@{/charities?page={next}(next=${next})}">Next</a></span>-->
+<!--                </div>-->
             </div>
     </section>
 
