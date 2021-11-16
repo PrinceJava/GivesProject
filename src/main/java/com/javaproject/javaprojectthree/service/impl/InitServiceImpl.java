@@ -1,13 +1,11 @@
 package com.javaproject.javaprojectthree.service.impl;
 
-<<<<<<< HEAD
+
 import com.javaproject.javaprojectthree.model.Charity;
 import com.javaproject.javaprojectthree.model.Role;
 import com.javaproject.javaprojectthree.model.User;
-=======
 import com.javaproject.javaprojectthree.exception.InformationExistException;
 import com.javaproject.javaprojectthree.model.*;
->>>>>>> 11b8b93723849325b5773e542ac1154d048a7963
 import com.javaproject.javaprojectthree.repository.CharityRepository;
 import com.javaproject.javaprojectthree.repository.RoleRepository;
 import com.javaproject.javaprojectthree.repository.TransactionLogRepository;
