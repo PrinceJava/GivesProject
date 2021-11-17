@@ -1,11 +1,38 @@
-<!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8" />
-    <title th:text="${add} ? 'Create a Charity' : 'Edit a Charity'"></title>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;300;700&display=swap" rel="stylesheet">
+
+    <link th:href="@{/styles/index.css}" rel="stylesheet">
+    <link href="../static/styles/index.css" rel="stylesheet">
+    <link th:href="@{/styles/general.css}" rel="stylesheet">
+    <link href="../static/styles/general.css" rel="stylesheet">
+
+    <title>Gives</title>
 </head>
 <body>
+<header class="header">
+    <img class="logo" alt="gives-logo-photo" th:src="@{/images/logoB.jpeg}" />
+    <ul class="main-nav-list"><li th:if="${myUser != null}" th:text="${myUser.username}"></li></ul>
+    <nav class="main-nav">
+        <ul class="main-nav-list">
+            <li><a class="main-nav-link" href="/admin" sec:authorize="hasRole('ROLE_ADMIN')">ADMIN</a> </li>
+            <li><a class="main-nav-link" href="/users/people">People</a></li>
+            <li><a class="main-nav-link" href="/charities/">Charities</a></li>
+            <li><a class="main-nav-link" href="/charities/register">Register</a></li>
+            <li>
+                <a th:if="${myUser ne null}" class="main-nav-link" href="/log_out">Log Out</a>
+                <a th:if="${myUser == null}" class="main-nav-link" href="/login">Login</a>
+            </li>
+        </ul>
+    </nav>
+</header>
 <h1 th:text="${add} ? 'Create a Charity:' : 'Edit a Charity:'"></h1>
 <a th:href="@{/charities/}">Back to Charities List</a>
 <br/><br/>
