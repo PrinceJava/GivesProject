@@ -40,12 +40,12 @@ public class TransactionLogController {
         return "transactions";
     }
 
-    @GetMapping("/{charityId}")
+    @GetMapping("/{transactionId}")
     public String findCharityById(
-            @PathVariable(value = "charityId") Long charityId,
+            @PathVariable(value = "transactionId") Long transactionId,
             Model model){
-        model.addAttribute("charity",charityService.findCharityById(charityId));
-        model.addAttribute("transactions", charityService.findAllTransactionsByCharityId(charityId));
+        model.addAttribute("transaction",transactionLogService.findTransactionById(transactionId));
+        model.addAttribute("charity", transactionLogService.findCharityByReceiver(transactionId));
         model.addAttribute("myUser", JavaProjectThreeApplication.myUserDetails);
         return "charity";
     }

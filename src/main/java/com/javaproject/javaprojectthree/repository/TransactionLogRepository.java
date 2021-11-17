@@ -13,5 +13,4 @@ public interface TransactionLogRepository extends JpaRepository<TransactionLog, 
     TransactionLog findTransactionLogById(Long transactionId);
     boolean existsById(Long transactionId);
     List<TransactionLog> findAllByReceiver(String charityName);
-
 }

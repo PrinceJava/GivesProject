@@ -9,5 +9,6 @@ public interface CharityRepository extends JpaRepository<Charity, Long> {
 
     Charity findCharityById(Long charityId);
     boolean existsByTitle(String title);
+    Charity findByTitle(String charityTitle);
 
 }
