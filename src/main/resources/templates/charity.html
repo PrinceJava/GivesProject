@@ -43,6 +43,9 @@
         </div>
         <div class="gives-text-box">
                 <p class="gives-description" th:text="${charity.description}"></p>
+                <progress th:value="${charity.totalReceived}" th:max="${charity.goal}">70 %</progress><br/>
+                Total Received: <span th:text="${charity.totalReceived}"></span> : Goal <span th:text="${charity.goal}"></span>
+            <br/><br/><br/>
             <a th:href="@{/charities/{id}/checkout(id=${charity.id})}" class="btn btn--full">Donate</a>
         </div>
     </div>

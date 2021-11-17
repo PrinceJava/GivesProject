@@ -48,6 +48,7 @@
                         <th>Charity</th>
                         <th>Goal</th>
                         <th>Total Received</th>
+                        <th>Progress</th>
                         <th>Verified</th>
                     </tr>
                     </thead>
@@ -57,6 +58,7 @@
                         <td><a th:href="@{/charities/{charityId}(charityId=${Charity.id})}" th:text="${Charity.title}"</td>
                         <td th:text="${Charity.goal}"></td>
                         <td th:text="${Charity.totalReceived}"></td>
+                        <td><progress th:value="${Charity.totalReceived}" th:max="${Charity.goal}">70 %</progress><br/></td>
                         <td th:text="${Charity.verified}"></td>
                     </tr>
                     </tbody>

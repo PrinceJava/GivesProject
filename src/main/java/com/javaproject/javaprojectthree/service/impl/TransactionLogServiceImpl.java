@@ -32,6 +32,9 @@ public class TransactionLogServiceImpl implements TransactionLogService {
         newTransaction.setDate(LocalDate.now());
         newTransaction.setAmount(amount);
         newTransaction.setComment(comment);
+        Charity charity = findCharityByReceiver(receiver);
+        charity.setTotalReceived(charity.getTotalReceived() + amount);
+        charityRepository.save(charity);
         return transactionLogRepository.save(newTransaction);
     }
 
@@ -63,6 +66,11 @@ public class TransactionLogServiceImpl implements TransactionLogService {
     }
 
     @Override
+    public Charity findCharityByReceiver(String charityTitle) {
+        return charityRepository.findByTitle(charityTitle);
+    }
+
+    @Override
     public TransactionLog save(TransactionLog transactionLog) throws InformationNotFoundException, InformationExistException {
         if(JavaProjectThreeApplication.myUserDetails != null) {
             if (!StringUtils.isEmpty(transactionLog.getReceiver())) {
@@ -70,6 +78,9 @@ public class TransactionLogServiceImpl implements TransactionLogService {
                     throw new InformationExistException("Transaction with id: " + transactionLog.getId() +
                             " already exists");
                 }
+                Charity charity = findCharityByReceiver(transactionLog.getReceiver());
+                charity.setTotalReceived(charity.getTotalReceived() + transactionLog.getAmount());
+
                 return transactionLogRepository.save(transactionLog);
             } else {
                 throw new InformationNotFoundException("Failed to save contact");
