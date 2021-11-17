@@ -124,11 +124,11 @@ public class CharityController {
 
     @GetMapping("/{charityId}/checkout")
     public String charityCheckout(
-            @PathVariable(value = "charityId") Long charityId){
+            @PathVariable(value = "charityId") Long charityId) {
 //            Model model){
 //        model.addAttribute("charity",charityService.findCharityById(charityId));
 //        model.addAttribute("myUser", JavaProjectThreeApplication.myUserDetails);
-        JavaProjectThreeApplication.charity = charityService.findCharityById(charityId);
-        return "redirect:http://localhost:8080/checkout.html";
+            JavaProjectThreeApplication.charity = charityService.findCharityById(charityId);
+            return "redirect:http://localhost:8080/checkout.html";
     }
 }
