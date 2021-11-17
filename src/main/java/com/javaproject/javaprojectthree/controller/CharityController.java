@@ -6,6 +6,7 @@ import com.javaproject.javaprojectthree.model.Charity;
 import com.javaproject.javaprojectthree.model.User;
 import com.javaproject.javaprojectthree.service.CharityService;
 import com.javaproject.javaprojectthree.service.UserService;
+import com.javaproject.javaprojectthree.service.impl.PaymentServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -123,10 +124,11 @@ public class CharityController {
 
     @GetMapping("/{charityId}/checkout")
     public String charityCheckout(
-            @PathVariable(value = "charityId") Long charityId,
-            Model model){
-        model.addAttribute("charity",charityService.findCharityById(charityId));
-        model.addAttribute("myUser", JavaProjectThreeApplication.myUserDetails);
-        return "checkout";
+            @PathVariable(value = "charityId") Long charityId){
+//            Model model){
+//        model.addAttribute("charity",charityService.findCharityById(charityId));
+//        model.addAttribute("myUser", JavaProjectThreeApplication.myUserDetails);
+        JavaProjectThreeApplication.charity = charityService.findCharityById(charityId);
+        return "redirect:http://localhost:8080/checkout.html";
     }
 }

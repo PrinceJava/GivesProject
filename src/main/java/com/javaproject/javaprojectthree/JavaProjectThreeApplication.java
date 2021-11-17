@@ -1,5 +1,6 @@
 package com.javaproject.javaprojectthree;
 
+import com.javaproject.javaprojectthree.model.Charity;
 import com.javaproject.javaprojectthree.model.Role;
 import com.javaproject.javaprojectthree.model.User;
 import com.javaproject.javaprojectthree.repository.UserRepository;
@@ -18,6 +19,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @SpringBootApplication
 public class JavaProjectThreeApplication {
 	public static UserDetails myUserDetails = null;
+	public static Charity charity = null;
 
 	public static void main(String[] args) {
 		SpringApplication.run(JavaProjectThreeApplication.class, args);
@@ -48,7 +50,7 @@ public class JavaProjectThreeApplication {
 			initService.addUserRole("user","ROLE_RECEIVER");
 			initService.addUserRole("raulr","ROLE_SENDER");
 
-			initService.createCharity("Red Cross", "Red Cross goal is to provide to those in need", 1000, 500,true, "https://www.redcross.org/content/dam/redcross/red-cross-logos/American-Red-Cross_Logo_1200x630.jpg");
+			initService.createCharity("Red Cross", "Red Cross goal is to provide to those in need", 1000, 500,true, "https://www.redcross.org/content/dam/redcross/red-cross-logos/American-Red-Cross_Logo_1200x630.jpg", "AQyXFrhWBt3G73-_sGK4Rez_x2uSnDUAus2q9ebccrJa61jfj-cI77kjWMTTvMEL1aSN09xZHo6Wbwu4", "EKFNRo5k5E8SQ8ZIp3VkjCC1tWw2ryTEdsJDfRDohXbxdHA0cb0tRY9oNDxGacJUQDEW7sgjKP5VmNPI","sandbox");
 			initService.createCharity("American Humane", "To ensure the safety, welfare and well-being of animals; to serve in promoting and nurturing the bonds between animals and humans.", 10000, 3500, true, "https://www.findingshelter.org/wp-content/uploads/2019/04/1200px-HSUS_logo.svg.png");
 			initService.createCharity("Breast Cancer Research Foundation", "To prevent and cure breast cancer by advancing the world's most promising research.", 100000, 20000, true, "https://d2g8igdw686xgo.cloudfront.net/35039048_1543798258447629_r.jpeg");
 			initService.createCharity("Child Find of America", "To prevent and resolve child abduction and the family conflicts that can lead to abduction and abuse.", 25000, 10000, true, "http://childfindofamerica.org/wp-content/uploads/2015/04/Loaction-Services-01.jpg");
