@@ -42,6 +42,7 @@ public class CharityController {
     public String findCharityById(
             @PathVariable(value = "charityId") Long charityId,
             Model model){
+        JavaProjectThreeApplication.charity = charityService.findCharityById(charityId);
         model.addAttribute("charity",charityService.findCharityById(charityId));
         model.addAttribute("transactions", charityService.findAllTransactionsByCharityId(charityId));
         model.addAttribute("myUser", JavaProjectThreeApplication.myUserDetails);

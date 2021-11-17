@@ -34,8 +34,6 @@ public class AuthorizePaymentServlet extends HttpServlet {
         String tax = request.getParameter("tax");
         String total = request.getParameter("total");
 
-//        Charity charity = charityService.findCharityById(Long.valueOf(request.getParameter("charity")));
-
         OrderDetail orderDetail = new OrderDetail(product, subtotal, shipping, tax, total);
 
         try {

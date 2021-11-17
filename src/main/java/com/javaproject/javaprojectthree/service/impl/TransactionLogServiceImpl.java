@@ -47,7 +47,7 @@ public class TransactionLogServiceImpl implements TransactionLogService {
 
     @Override
     public TransactionLog findTransactionById(Long id) {
-        return null;
+        return transactionLogRepository.findTransactionLogById(id);
     }
 
     @Override
