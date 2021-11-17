@@ -3,10 +3,11 @@ package com.javaproject.javaprojectthree.controller;
 import com.javaproject.javaprojectthree.JavaProjectThreeApplication;
 import com.javaproject.javaprojectthree.exception.InformationNotFoundException;
 import com.javaproject.javaprojectthree.model.Charity;
+import com.javaproject.javaprojectthree.model.TransactionLog;
 import com.javaproject.javaprojectthree.model.User;
 import com.javaproject.javaprojectthree.service.CharityService;
+import com.javaproject.javaprojectthree.service.TransactionLogService;
 import com.javaproject.javaprojectthree.service.UserService;
-import com.javaproject.javaprojectthree.service.impl.PaymentServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,12 +18,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("/charities")
-public class CharityController {
+@RequestMapping("/transactions")
+public class TransactionLogController {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
-
-    int ROW_PER_PAGE = 5;
 
     @Autowired
     CharityService charityService;
@@ -30,50 +29,52 @@ public class CharityController {
     @Autowired
     UserService userService;
 
+    @Autowired
+    TransactionLogService transactionLogService;
+
     @GetMapping("/")
-    public String getCharities(Model model) {
-        List<Charity> charities = charityService.findAllCharities();
-          model.addAttribute("charities",charities);
+    public String findAllTransactions(Model model) {
+        List<TransactionLog> transactions = transactionLogService.findAllTransactions();
+          model.addAttribute("transactions",transactions);
           model.addAttribute("myUser", JavaProjectThreeApplication.myUserDetails);
-        return "charities";
+        return "transactions";
     }
 
-    @GetMapping("/{charityId}")
+    @GetMapping("/{transactionId}")
     public String findCharityById(
-            @PathVariable(value = "charityId") Long charityId,
+            @PathVariable(value = "transactionId") Long transactionId,
             Model model){
-        JavaProjectThreeApplication.charity = charityService.findCharityById(charityId);
-        model.addAttribute("charity",charityService.findCharityById(charityId));
-        model.addAttribute("transactions", charityService.findAllTransactionsByCharityId(charityId));
+        model.addAttribute("transaction",transactionLogService.findTransactionById(transactionId));
+        model.addAttribute("charity", transactionLogService.findCharityByReceiver(transactionId));
         model.addAttribute("myUser", JavaProjectThreeApplication.myUserDetails);
-        return "charity";
+        return "transaction";
     }
 
     @GetMapping(value = {"/add"})
-    public String showAddContact(Model model) {
+    public String showAddTransaction(Model model) {
         if(JavaProjectThreeApplication.myUserDetails != null) {
-            Charity charity = new Charity();
+            TransactionLog transaction = new TransactionLog();
             User user = new User();
             model.addAttribute("add", true);
-            model.addAttribute("charity", charity);
+            model.addAttribute("transaction", transaction);
             model.addAttribute("user", user);
             model.addAttribute("myUser", JavaProjectThreeApplication.myUserDetails);
 
-            return "charitiesEdit";
+            return "transactionsEdit";
         }else {
-            return "redirect:/charities/";
+            return "redirect:/transactions/";
         }
     }
 
     @PostMapping(value = "/add")
     public String addContact(Model model,
-                             @ModelAttribute("charity") Charity charity,
+                             @ModelAttribute("transaction") TransactionLog transaction,
                              @ModelAttribute("user") User user) {
         User newUser = userService.findUserByEmailAddress(user.getEmailAddress());
-        charity.setUser(newUser);
+        transaction.setSender(newUser.getUserName());
         try {
-            Charity newCharity = charityService.save(charity);
-            return "redirect:/charities/" + newCharity.getId();
+            TransactionLog transactionLog = transactionLogService.save(transaction);
+            return "redirect:/transactions/" + transactionLog.getId();
         } catch (Exception ex) {
             // log exception first,
             // then show error
@@ -82,32 +83,32 @@ public class CharityController {
             model.addAttribute("errorMessage", errorMessage);
             model.addAttribute("add", true);
             model.addAttribute("myUser", JavaProjectThreeApplication.myUserDetails);
-            return "charitiesEdit";
+            return "transactionsEdit";
         }
     }
 
-    @GetMapping(value = {"/charities/{charityId}/edit"})
-    public String showEditCharity(Model model, @PathVariable long charityId) {
-        Charity charity = null;
+    @GetMapping(value = {"/transactions/{transactionId}/edit"})
+    public String showEditCharity(Model model, @PathVariable long transactionId) {
+        TransactionLog transactionLog = null;
         try {
-            charity = charityService.findById(charityId);
+            transactionLog = transactionLogService.findTransactionById(transactionId);
         } catch (InformationNotFoundException ex) {
-            model.addAttribute("errorMessage", "Contact not found");
+            model.addAttribute("errorMessage", "Transaction not found");
         }
         model.addAttribute("add", false);
-        model.addAttribute("charity", charity);
+        model.addAttribute("transaction", transactionLog);
         model.addAttribute("myUser", JavaProjectThreeApplication.myUserDetails);
-        return "charitiesEdit";
+        return "transactionsEdit";
     }
 
-    @PostMapping(value = {"/charities/{charityId}/edit"})
-    public String updateCharity(Model model,
-                                @PathVariable long charityId,
-                                @ModelAttribute("charity") Charity charity) {
+    @PostMapping(value = {"/transactions/{transactionId}/edit"})
+    public String updateTransaction(Model model,
+                                @PathVariable long transactionId,
+                                @ModelAttribute("transaction") TransactionLog transaction) {
         try {
-            charity.setId(charityId);
-            charityService.update(charity);
-            return "redirect:/charities/" + charity.getId();
+            transaction.setId(transactionId);
+            transactionLogService.update(transaction);
+            return "redirect:/transactions/" + transaction.getId();
         } catch (Exception ex) {
             // log exception first,
             // then show error
@@ -116,20 +117,7 @@ public class CharityController {
             model.addAttribute("errorMessage", errorMessage);
             model.addAttribute("add", false);
             model.addAttribute("myUser", JavaProjectThreeApplication.myUserDetails);
-            return "charitiesEdit";
+            return "transactionsEdit";
         }
-    }
-
-
-
-
-    @GetMapping("/{charityId}/checkout")
-    public String charityCheckout(
-            @PathVariable(value = "charityId") Long charityId) {
-//            Model model){
-//        model.addAttribute("charity",charityService.findCharityById(charityId));
-//        model.addAttribute("myUser", JavaProjectThreeApplication.myUserDetails);
-            JavaProjectThreeApplication.charity = charityService.findCharityById(charityId);
-            return "redirect:http://localhost:8080/checkout.html";
     }
 }
