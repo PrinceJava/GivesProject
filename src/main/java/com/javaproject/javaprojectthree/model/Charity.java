@@ -43,6 +43,18 @@ public class Charity {
     @Column
     private String pictureURL;
 
+    @Column
+    @JsonIgnore
+    private String CLIENT_ID;
+
+    @Column
+    @JsonIgnore
+    private String CLIENT_SECRET;
+
+    @Column
+    @JsonIgnore
+    private String MODE;
+
     @ManyToMany(fetch = FetchType.LAZY)
     private Collection<TransactionLog> donationList = new ArrayList<>();
 
@@ -67,5 +79,17 @@ public class Charity {
         this.verified = verified;
         this.pictureURL = pictureURL;
         this.setUser(user);
+    }
+    public Charity (String title, String description, double goal, double totalReceived, Boolean verified, String pictureURL, User user, String CLIENT_ID, String CLIENT_SECRET, String MODE){
+        this.title = title;
+        this.description = description;
+        this.goal = goal;
+        this.totalReceived = totalReceived;
+        this.verified = verified;
+        this.pictureURL = pictureURL;
+        this.setUser(user);
+        this.CLIENT_ID = CLIENT_ID;
+        this.CLIENT_SECRET = CLIENT_SECRET;
+        this.MODE = MODE;
     }
 }

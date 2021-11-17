@@ -39,6 +39,11 @@
                 <td>${transaction.amount.total}</td>
             </tr>
             <tr><td><br/></td></tr>
+            <tr>
+                <td colspan="2" align="center">
+                    <a href="${pageContext.request.contextPath}/">Return Home</a>
+                </td>
+            </tr>
         </table>
 </div>
 </body>

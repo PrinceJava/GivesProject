@@ -85,6 +85,22 @@ public class InitServiceImpl implements InitService {
     }
 
     @Override
+    public Charity createCharity(String title, String description, double goal, double totalReceived, Boolean verified, String pictureURL, String CLIENT_ID, String CLIENT_SECRET, String MODE) {
+        System.out.println("Calling INIT SERVICE createCharity with Credentials ==>");
+        Charity newCharity = new Charity();
+        newCharity.setTitle(title);
+        newCharity.setDescription(description);
+        newCharity.setGoal(goal);
+        newCharity.setTotalReceived(totalReceived);
+        newCharity.setVerified(verified);
+        newCharity.setPictureURL(pictureURL);
+        newCharity.setCLIENT_ID(CLIENT_ID);
+        newCharity.setCLIENT_SECRET(CLIENT_SECRET);
+        newCharity.setMODE(MODE);
+        return charityRepository.save(newCharity);
+    }
+
+    @Override
     public void addUserToCharity(String username, Long charityId) {
         System.out.println("Calling INIT SERVICE addRoleToUser ==>");
         User user = userRepository.findUserByUserName(username);

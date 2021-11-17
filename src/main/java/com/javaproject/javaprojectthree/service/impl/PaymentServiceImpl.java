@@ -1,5 +1,6 @@
 package com.javaproject.javaprojectthree.service.impl;
 
+import com.javaproject.javaprojectthree.JavaProjectThreeApplication;
 import com.javaproject.javaprojectthree.model.Charity;
 import com.paypal.api.payments.*;
 import com.paypal.base.rest.APIContext;
@@ -12,12 +13,14 @@ import java.util.List;
 
 public class PaymentServiceImpl implements PaymentService {
 
-    Charity charity = null;
+    public static Charity charity = JavaProjectThreeApplication.charity;
 
     //private static final String CLIENT_ID = "ASZi1Ccgr3gq3AL_Qg046RBD556tg_mADvDUAdX0uB7ysX35FvbN3JzUxh-9ycCy61Ba5qrLcpacuZ8w";
-    // private static final String CLIENT_ID = charity.
-    private static final String CLIENT_SECRET = "EHczyy5HpMK2emUAPSW8TOfk77oiutx5xd-QdXpfYNTo5sYeDx-I1yZGgfayLYG1kiGgMEuW_DJdC73A";
-    private static final String MODE = "sandbox";
+    private static final String CLIENT_ID = charity.getCLIENT_ID();
+    //private static final String CLIENT_SECRET = "EHczyy5HpMK2emUAPSW8TOfk77oiutx5xd-QdXpfYNTo5sYeDx-I1yZGgfayLYG1kiGgMEuW_DJdC73A";
+    private static final String CLIENT_SECRET = charity.getCLIENT_SECRET();
+    //private static final String MODE = "sandbox";
+    private static final String MODE = charity.getMODE();
 
 
     private String getApprovalLink(Payment approvedPayment){
