@@ -30,9 +30,10 @@ keep track of that goal as they receive payments.
 
 ## Final Entity Relationship Diagram (ERD):
 
-
+![img_17.png](images/img_17.png)
 
 ##POM Dependencies
+
 
 ##Endpoints
 
@@ -42,18 +43,18 @@ keep track of that goal as they receive payments.
 
 |  |  |
 | --- | :--- |
-| ![img_5.png](img_5.png) | Spring Boot 
-| ![img_7.png](img_7.png) | Postman
-|![img_8.png](img_8.png)  | Json Web Tokens
-|![img_6.png](img_6.png)  | IntelliJ IDEA 17
-|![img_9.png](img_9.png) | Postgres
-|![img_10.png](img_10.png) | LucidApp
-|![img_12.png](img_12.png) |Thymeleaf
-|![img_14.png](img_14.png) |GitHub Branching
+| ![img_5.png](images/img_5.png) | Spring Boot 
+| ![img_7.png](images/img_7.png) | Postman
+|![img_8.png](images/img_8.png)  | Json Web Tokens
+|![img_6.png](images/img_6.png)  | IntelliJ IDEA 17
+|![img_9.png](images/img_9.png) | Postgres
+|![img_10.png](images/img_10.png) | LucidApp
+|![img_12.png](images/img_12.png) |Thymeleaf
+|![img_14.png](images/img_14.png) |GitHub Branching
 
 ##User Stories
 
-![img_16.png](img_16.png)
+![img_16.png](images/img_16.png)
 
 | | 
 |:---|
@@ -72,15 +73,20 @@ keep track of that goal as they receive payments.
 
 ##Project Challenges
 
-![img_4.png](img_4.png)
+![img_4.png](images/img_4.png)
 
 1. Using a single Github repository proved to be challenging; however, after some research we
     were able to 
 
-3. The first coding challenge we faced was creating a user with login credentials using JWT. We realized 
-the error was in our coding as the JWTUtils did not have the correct parameters in our class regarding
-Secret Key. Once this was corrected, we were able to generate a JWT Token for an admin and a user. 
+2. The first coding challenge we faced was creating a user with login credentials using JWT. We realized 
+   the error was in our coding as the JWTUtils did not have the correct parameters in our class regarding
+   Secret Key. Once this was corrected, we were able to generate a JWT Token for an admin and a user. 
 
-4. Another challenge that appeared 
+3. Another challenge that appeared occurred during the credentials set up as the user or admin were unable
+   to create a charity due to the authentication process not passing through to the web application. This
+   caused us to refactor the code and remove the credential classes. The credentials were then added to the
+   charity class as a user or admin can be tied to each fundraising charity. 
+
+4. During the creation of a new charity, the URL re-direct would not pass the method for this class. 
 
 
