@@ -1,6 +1,6 @@
 # paypal-java-capstone-project
 
-###Raul and Matthew Project 3
+##Raul and Matthew Project 3
 
 
 ##Getting Started
@@ -78,7 +78,8 @@ keep track of that goal as they receive payments.
 ![img_4.png](images/img_4.png)
 
 1. Using a single Github repository proved to be challenging; however, after some research we
-    were able to 
+    were able to figure it out and solve the issue. We ended up creating a "matthew" and "raul" 
+    branch, which we utilized to make changes to the "Master" branch by merging our code. 
 
 2. The first coding challenge we faced was creating a user with login credentials using JWT. We realized 
    the error was in our coding as the JWTUtils did not have the correct parameters in our class regarding
@@ -89,6 +90,8 @@ keep track of that goal as they receive payments.
    caused us to refactor the code and remove the credential classes. The credentials were then added to the
    charity class as a user or admin can be tied to each fundraising charity. 
 
-4. During the creation of a new charity, the URL re-direct would not pass the method for this class. 
+4. During the creation of a new charity, the URL re-direct would not pass the method for this class, this was
+    resolved by re-creating the Charities HTML file with a re-direct for creating and updating a charity at
+    the same time. 
 
 
