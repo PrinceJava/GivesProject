@@ -1,11 +1,9 @@
 package com.javaproject.javaprojectthree.controller;
 
-
 import com.javaproject.javaprojectthree.JavaProjectThreeApplication;
-import com.javaproject.javaprojectthree.model.Charity;
 import com.javaproject.javaprojectthree.model.User;
 import com.javaproject.javaprojectthree.model.forms.LoginRequest;
-import com.javaproject.javaprojectthree.model.forms.RegisterForm;
+import com.javaproject.javaprojectthree.model.forms.RegisterUser;
 import com.javaproject.javaprojectthree.service.CharityService;
 import com.javaproject.javaprojectthree.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,19 +43,24 @@ public class AuthenticationController {
     }
 
     @PostMapping("/register")
-    public User createUser(@RequestBody RegisterForm registerForm){
+    public User createUser(@RequestBody RegisterUser registerUser){
         System.out.println("controller is calling create user ===>");
-//        return userService.createUser(registerForm.getFirstName(), registerForm.getLastName(),
-//                registerForm.getUserName(),
-//                registerForm.getEmailAddress(), registerForm.getPassword(),
-//                registerForm.getRole());
-        return null;
+        return userService.createUser(registerUser.getUserName(),
+        registerUser.getFirstName(), registerUser.getLastName(), registerUser.getEmailAddress(),
+        registerUser.getPassword(), registerUser.getRole());
     }
+
+    @GetMapping("/register")
+    public String userRegister(){
+        return "register";
+    }
+
 
     @PostMapping("/login")
     public ResponseEntity<?> loginUser(LoginRequest loginRequest){
         System.out.println("Controller is calling loginUser ===>");
         return userService.loginUser(loginRequest);
     }
+
 
 }
