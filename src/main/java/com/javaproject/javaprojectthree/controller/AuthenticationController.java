@@ -44,14 +44,15 @@ public class AuthenticationController {
         return "login";
     }
 
-/*    @PostMapping("/register")
+    @PostMapping("/register")
     public User createUser(@RequestBody RegisterForm registerForm){
         System.out.println("controller is calling create user ===>");
-        return userService.createUser(registerForm.getFirstName(), registerForm.getLastName(),
-                registerForm.getUserName(),
-                registerForm.getEmailAddress(), registerForm.getPassword(),
-                registerForm.getRole());
-    }*/
+//        return userService.createUser(registerForm.getFirstName(), registerForm.getLastName(),
+//                registerForm.getUserName(),
+//                registerForm.getEmailAddress(), registerForm.getPassword(),
+//                registerForm.getRole());
+        return null;
+    }
 
     @PostMapping("/login")
     public ResponseEntity<?> loginUser(LoginRequest loginRequest){
