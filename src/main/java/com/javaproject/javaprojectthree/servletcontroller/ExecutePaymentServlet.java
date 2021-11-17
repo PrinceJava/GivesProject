@@ -1,11 +1,13 @@
 package com.javaproject.javaprojectthree.servletcontroller;
 
+import com.javaproject.javaprojectthree.controller.TransactionLogController;
 import com.javaproject.javaprojectthree.service.impl.PaymentServiceImpl;
 import com.paypal.api.payments.PayerInfo;
 import com.paypal.api.payments.Payment;
 import com.paypal.api.payments.Transaction;
 import com.paypal.base.rest.PayPalRESTException;
 import com.javaproject.javaprojectthree.service.PaymentService;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,6 +18,9 @@ import java.io.IOException;
 
 @WebServlet(name = "execute_payment", value = "/execute_payment")
 public class ExecutePaymentServlet extends HttpServlet {
+
+    @Autowired
+    TransactionLogController transactionLogController;
 
     public ExecutePaymentServlet(){}
 
@@ -45,5 +50,6 @@ public class ExecutePaymentServlet extends HttpServlet {
             request.setAttribute("errorMessage", ex.getMessage());
             request.getRequestDispatcher("error.jsp").forward(request,response);
         }
+
     }
 }
