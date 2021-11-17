@@ -2,6 +2,8 @@ package com.javaproject.javaprojectthree.service.impl;
 
 import com.javaproject.javaprojectthree.JavaProjectThreeApplication;
 import com.javaproject.javaprojectthree.exception.InformationExistException;
+import com.javaproject.javaprojectthree.exception.InformationNotFoundException;
+import com.javaproject.javaprojectthree.model.Charity;
 import com.javaproject.javaprojectthree.model.Role;
 import com.javaproject.javaprojectthree.model.User;
 import com.javaproject.javaprojectthree.model.forms.LoginRequest;
@@ -18,6 +20,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.thymeleaf.util.StringUtils;
 
 import java.util.List;
 
@@ -110,7 +113,29 @@ public class UserServiceImpl implements UserService {
         }
 
 
-        // Implemented method to find user by passed String email Address.
+    public User saveUser(User user) throws InformationNotFoundException, InformationExistException {
+        if(JavaProjectThreeApplication.myUserDetails != null) {
+            if (!StringUtils.isEmpty(user.getEmailAddress())) {
+                if (user.getId() != null && userRepository.existsByEmailAddress(user.getEmailAddress())) {
+                    throw new InformationExistException("User with id: " + user.getEmailAddress() +
+                            " already exists");
+                }
+                return userRepository.save(user);
+            } else {
+                throw new InformationNotFoundException("Failed to save user");
+            }
+        }else {
+            throw new InformationNotFoundException("Failed to save user");
+        }
+    }
+
+    @Override
+    public User showEditUser(User user) {
+        return userRepository.findUserByEmailAddress(user.getEmailAddress());
+    }
+
+
+    // Implemented method to find user by passed String email Address.
         public User findUserByEmailAddress(String email) {
             return userRepository.findUserByEmailAddress(email);
         }
