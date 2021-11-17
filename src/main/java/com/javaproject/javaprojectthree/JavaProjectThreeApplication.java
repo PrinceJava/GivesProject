@@ -3,6 +3,7 @@ package com.javaproject.javaprojectthree;
 import com.javaproject.javaprojectthree.model.Role;
 import com.javaproject.javaprojectthree.model.User;
 import com.javaproject.javaprojectthree.repository.UserRepository;
+import com.javaproject.javaprojectthree.security.MyUserDetails;
 import com.javaproject.javaprojectthree.service.InitService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -10,11 +11,13 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @ServletComponentScan
 @SpringBootApplication
 public class JavaProjectThreeApplication {
+	public static UserDetails myUserDetails = null;
 
 	public static void main(String[] args) {
 		SpringApplication.run(JavaProjectThreeApplication.class, args);

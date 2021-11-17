@@ -1,5 +1,6 @@
 package com.javaproject.javaprojectthree.service.impl;
 
+import com.javaproject.javaprojectthree.JavaProjectThreeApplication;
 import com.javaproject.javaprojectthree.exception.InformationExistException;
 import com.javaproject.javaprojectthree.exception.InformationNotFoundException;
 import com.javaproject.javaprojectthree.model.Charity;
@@ -13,12 +14,14 @@ import com.javaproject.javaprojectthree.model.forms.RegisterForm;
 import com.javaproject.javaprojectthree.repository.CharityRepository;
 import com.javaproject.javaprojectthree.repository.TransactionLogRepository;
 import com.javaproject.javaprojectthree.repository.UserRepository;
+import com.javaproject.javaprojectthree.security.MyUserDetails;
 import com.javaproject.javaprojectthree.service.CharityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.util.StringUtils;
 
@@ -43,43 +46,49 @@ public class CharityServiceImpl implements CharityService {
 
     @Override
     public Charity createCharity(String title, String description, double goal, double totalReceived, Boolean verified, String pictureURL) {
+        if (JavaProjectThreeApplication.myUserDetails != null) {
+            if (!charityRepository.existsByTitle(title)) {
 
-        if (!charityRepository.existsByTitle(title)) {
-
-            Charity newCharity = new Charity();
-            newCharity.setTitle(title);
-            newCharity.setDescription(description);
-            newCharity.setGoal(goal);
-            newCharity.setTotalReceived(totalReceived);
-            newCharity.setVerified(false);
-            newCharity.setPictureURL(pictureURL);
-            return charityRepository.save(newCharity);
+                Charity newCharity = new Charity();
+                newCharity.setTitle(title);
+                newCharity.setDescription(description);
+                newCharity.setGoal(goal);
+                newCharity.setTotalReceived(totalReceived);
+                newCharity.setVerified(false);
+                newCharity.setPictureURL(pictureURL);
+                return charityRepository.save(newCharity);
+            } else {
+                throw new InformationExistException("Charity with the name " +
+                        title + " already exists");
+            }
         } else {
-            throw new InformationExistException("Charity with the name " +
-                    title + " already exists");
+            throw new InformationNotFoundException("Must be logged in to perform this action");
         }
     }
-
     @Override
     public ResponseEntity<?> createCharity(RegisterForm registerForm) {
+        if(JavaProjectThreeApplication.myUserDetails != null) {
+            if (!charityRepository.existsByTitle(registerForm.getTitle())) {
 
-        if (!charityRepository.existsByTitle(registerForm.getTitle())) {
-
-            Charity newCharity = new Charity();
-            newCharity.setTitle(registerForm.getTitle());
-            newCharity.setDescription(registerForm.getDescription());
-            newCharity.setGoal(registerForm.getGoal());
-            newCharity.setTotalReceived(0);
-            newCharity.setVerified(false);
-            newCharity.setPictureURL(registerForm.getPictureURL());
-            newCharity.setUser(
-                    userRepository.findUserByUserName(registerForm.getUsername())
-            );
-            return ResponseEntity.ok(charityRepository.save(newCharity));
-        } else {
-            throw new InformationExistException("Charity with the name " +
-                    registerForm.getTitle() + " already exists");
+                Charity newCharity = new Charity();
+                newCharity.setTitle(registerForm.getTitle());
+                newCharity.setDescription(registerForm.getDescription());
+                newCharity.setGoal(registerForm.getGoal());
+                newCharity.setTotalReceived(0);
+                newCharity.setVerified(false);
+                newCharity.setPictureURL(registerForm.getPictureURL());
+                newCharity.setUser(
+                        userRepository.findUserByUserName(registerForm.getUsername())
+                );
+                return ResponseEntity.ok(charityRepository.save(newCharity));
+            } else {
+                throw new InformationExistException("Charity with the name " +
+                        registerForm.getTitle() + " already exists");
+            }
         }
+        else {
+            throw new InformationNotFoundException("Must be logged in to perform this action");
+            }
     }
 
     @Override
@@ -99,13 +108,17 @@ public class CharityServiceImpl implements CharityService {
         return charityRepository.findCharityById(id);
     }
 
-    public void deleteCharity(Long charityId){
-        System.out.println("Service calling deleteCharity ==>");
-        Optional<Charity> charity = charityRepository.findById(charityId);
-        if (charity.isPresent()) {
-            charityRepository.deleteById(charityId);
+    public void deleteCharity(Long charityId) {
+        if (JavaProjectThreeApplication.myUserDetails != null) {
+            System.out.println("Service calling deleteCharity ==>");
+            Optional<Charity> charity = charityRepository.findById(charityId);
+            if (charity.isPresent()) {
+                charityRepository.deleteById(charityId);
+            } else {
+                throw new InformationNotFoundException("Charity with id " + charityId + " not found");
+            }
         } else {
-            throw new InformationNotFoundException("Charity with id " + charityId + " not found");
+            throw new InformationNotFoundException("Must be logged in to perform this action");
         }
     }
 
@@ -141,14 +154,17 @@ public class CharityServiceImpl implements CharityService {
 
     @Override
     public Charity save(Charity charity) throws InformationNotFoundException, InformationExistException {
-        if (!StringUtils.isEmpty(charity.getTitle())) {
-            if (charity.getId() != null && charityRepository.existsByTitle(charity.getTitle())) {
-                throw new InformationExistException("Charity with id: " + charity.getId() +
-                        " already exists");
+        if(JavaProjectThreeApplication.myUserDetails != null) {
+            if (!StringUtils.isEmpty(charity.getTitle())) {
+                if (charity.getId() != null && charityRepository.existsByTitle(charity.getTitle())) {
+                    throw new InformationExistException("Charity with id: " + charity.getId() +
+                            " already exists");
+                }
+                return charityRepository.save(charity);
+            } else {
+                throw new InformationNotFoundException("Failed to save contact");
             }
-            return charityRepository.save(charity);
-        }
-        else {
+        }else {
             throw new InformationNotFoundException("Failed to save contact");
         }
     }
@@ -156,14 +172,17 @@ public class CharityServiceImpl implements CharityService {
     @Override
     public void update(Charity charity)
             throws InformationNotFoundException, InformationExistException {
-        if (!StringUtils.isEmpty(charity.getTitle())) {
-            if (!charityRepository.existsByTitle(charity.getTitle())) {
-                throw new InformationNotFoundException("Cannot find Contact with id: " + charity.getId());
+        if (JavaProjectThreeApplication.myUserDetails != null) {
+            if (!StringUtils.isEmpty(charity.getTitle())) {
+                if (!charityRepository.existsByTitle(charity.getTitle())) {
+                    throw new InformationNotFoundException("Cannot find Contact with id: " + charity.getId());
+                }
+                charityRepository.save(charity);
+            } else {
+                throw new InformationNotFoundException("Failed to save contact");
             }
-            charityRepository.save(charity);
-        }
-        else {
-            throw new InformationNotFoundException("Failed to save contact");
+        } else {
+            throw new InformationNotFoundException("Must be logged in to perform this action");
         }
     }
 

@@ -1,4 +1,5 @@
 package com.javaproject.javaprojectthree.controller;
+import com.javaproject.javaprojectthree.JavaProjectThreeApplication;
 import com.javaproject.javaprojectthree.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,6 +23,7 @@ public class UserController {
     @GetMapping({"/all", "/people"})
     public String findAllUsers(Model model){
         model.addAttribute("listUsers",userService.findAllUsers());
+        model.addAttribute("myUser", JavaProjectThreeApplication.myUserDetails);
         return "people";
     }
 
@@ -30,6 +32,7 @@ public class UserController {
             @PathVariable(value = "userId") Long userId,
             Model model){
         model.addAttribute("user",userService.findUserById(userId));
+        model.addAttribute("myUser", JavaProjectThreeApplication.myUserDetails);
         return "person";
     }
 }

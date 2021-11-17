@@ -1,4 +1,5 @@
-<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -17,13 +18,18 @@
 </head>
 <body>
 <header class="header">
-    <img class="logo" alt="gives-logo-photo" th:src="@{/images/logoB.jpeg}" />
+    <a th:href="@{/}"><img class="logo" alt="gives-logo-photo" th:src="@{/images/logoB.jpeg}"/></a>
+    <ul class="main-nav-list"><li th:if="${myUser != null}" th:text="${myUser.username}"></li></ul>
     <nav class="main-nav">
         <ul class="main-nav-list">
+            <li><a class="main-nav-link" href="/admin" sec:authorize="hasRole('ROLE_ADMIN')">ADMIN</a> </li>
             <li><a class="main-nav-link" href="/users/people">People</a></li>
-            <li><a class="main-nav-link" href="#">Charities</a></li>
-            <li><a class="main-nav-link" href="#">Register</a></li>
-            <li><a class="main-nav-link" href="#">Sign In</a></li>
+            <li><a class="main-nav-link" href="/charities/">Charities</a></li>
+            <li><a th:if="${myUser != null}" class="main-nav-link" href="/charities/add">Register</a></li>
+            <li>
+                <a th:if="${myUser ne null}" class="main-nav-link" href="/log_out">Log Out</a>
+                <a th:if="${myUser == null}" class="main-nav-link" href="/login">Login</a>
+            </li>
         </ul>
     </nav>
 </header>

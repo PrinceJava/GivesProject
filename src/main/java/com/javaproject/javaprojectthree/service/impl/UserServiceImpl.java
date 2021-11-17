@@ -1,5 +1,6 @@
 package com.javaproject.javaprojectthree.service.impl;
 
+import com.javaproject.javaprojectthree.JavaProjectThreeApplication;
 import com.javaproject.javaprojectthree.exception.InformationExistException;
 import com.javaproject.javaprojectthree.model.Role;
 import com.javaproject.javaprojectthree.model.User;
@@ -89,6 +90,7 @@ public class UserServiceImpl implements UserService {
             authenticationManager.authenticate(new
                     UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()));
             final UserDetails userDetails = userDetailsService.loadUserByUsername(loginRequest.getEmail());
+            JavaProjectThreeApplication.myUserDetails = userDetails;
             final String JWT = jwtUtils.generateToken(userDetails);
             return ResponseEntity.ok(new LoginResponse(JWT));
         }
@@ -96,6 +98,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findUserById(Long id) {
         return userRepository.findUserById(id);
+    }
+
+    @Override
+    public void logout() {
+        JavaProjectThreeApplication.myUserDetails = null;
     }
 
     public List<User> findAllUsers(){
