@@ -1,5 +1,6 @@
 package com.javaproject.javaprojectthree.controller;
 
+import com.javaproject.javaprojectthree.JavaProjectThreeApplication;
 import com.javaproject.javaprojectthree.exception.InformationNotFoundException;
 import com.javaproject.javaprojectthree.model.Charity;
 import com.javaproject.javaprojectthree.model.User;
@@ -32,6 +33,7 @@ public class CharityController {
     public String getCharities(Model model) {
         List<Charity> charities = charityService.findAllCharities();
           model.addAttribute("charities",charities);
+          model.addAttribute("myUser", JavaProjectThreeApplication.myUserDetails);
         return "charities";
     }
 
@@ -46,13 +48,18 @@ public class CharityController {
 
     @GetMapping(value = {"/add"})
     public String showAddContact(Model model) {
-        Charity charity = new Charity();
-        User user = new User();
-        model.addAttribute("add", true);
-        model.addAttribute("charity", charity);
-        model.addAttribute("user",user);
+        if(JavaProjectThreeApplication.myUserDetails != null) {
+            Charity charity = new Charity();
+            User user = new User();
+            model.addAttribute("add", true);
+            model.addAttribute("charity", charity);
+            model.addAttribute("user", user);
+            model.addAttribute("myUser", JavaProjectThreeApplication.myUserDetails);
 
-        return "charitiesEdit";
+            return "charitiesEdit";
+        }else {
+            return "redirect:/charities/";
+        }
     }
 
     @PostMapping(value = "/add")
@@ -70,9 +77,8 @@ public class CharityController {
             String errorMessage = ex.getMessage();
             logger.error(errorMessage);
             model.addAttribute("errorMessage", errorMessage);
-
-            //model.addAttribute("contact", contact);
             model.addAttribute("add", true);
+            model.addAttribute("myUser", JavaProjectThreeApplication.myUserDetails);
             return "charitiesEdit";
         }
     }
@@ -87,6 +93,7 @@ public class CharityController {
         }
         model.addAttribute("add", false);
         model.addAttribute("charity", charity);
+        model.addAttribute("myUser", JavaProjectThreeApplication.myUserDetails);
         return "charitiesEdit";
     }
 
@@ -104,8 +111,8 @@ public class CharityController {
             String errorMessage = ex.getMessage();
             logger.error(errorMessage);
             model.addAttribute("errorMessage", errorMessage);
-
             model.addAttribute("add", false);
+            model.addAttribute("myUser", JavaProjectThreeApplication.myUserDetails);
             return "charitiesEdit";
         }
     }
@@ -118,6 +125,7 @@ public class CharityController {
             @PathVariable(value = "charityId") Long charityId,
             Model model){
         model.addAttribute("charity",charityService.findCharityById(charityId));
+        model.addAttribute("myUser", JavaProjectThreeApplication.myUserDetails);
         return "checkout.html";
     }
 }
