@@ -1,0 +1,76 @@
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;300;700&display=swap" rel="stylesheet">
+
+    <link th:href="@{/styles/index.css}" rel="stylesheet">
+    <link href="../static/styles/index.css" rel="stylesheet">
+    <link th:href="@{/styles/general.css}" rel="stylesheet">
+    <link href="../static/styles/general.css" rel="stylesheet">
+
+    <title>Gives</title>
+</head>
+<body>
+<header class="header">
+    <a th:href="@{/}"><img class="logo" alt="gives-logo-photo" th:src="@{/images/logoB.jpeg}"/></a>
+    <ul class="main-nav-list"><li th:if="${myUser != null}" th:text="${myUser.username}"></li></ul>
+    <nav class="main-nav">
+        <ul class="main-nav-list">
+            <li><a class="main-nav-link" href="/admin" sec:authorize="hasRole('ROLE_ADMIN')">ADMIN</a> </li>
+            <li><a class="main-nav-link" href="/users/people">People</a></li>
+            <li><a class="main-nav-link" href="/charities/">Charities</a></li>
+            <li><a th:if="${myUser != null}" class="main-nav-link" href="/charities/add">Register</a></li>
+            <li>
+                <a th:if="${myUser ne null}" class="main-nav-link" href="/log_out">Log Out</a>
+                <a th:if="${myUser == null}" class="main-nav-link" href="/login">Login</a>
+            </li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <section class="section-gives">
+            <div align="center">
+                <h1>Charities List</h1>
+                <div>
+                    <a th:if="${myUser != null}" href="charities/add" th:href="@{/charities/add}" rel="sign a charity up">Register A Charity</a>
+                </div>
+                <table border="1">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Sender</th>
+                        <th>Receiver</th>
+                        <th>Date</th>
+                        <th>Amount</th>
+                        <th>Comment</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td th:text="${transaction.id}"></td>
+                        <td th:text="${transaction.sender}"></td>
+                        <td th:text="${transaction.receiver}"></td>
+                        <td th:text="${transaction.date}"></td>
+                        <td th:text="${transaction.amount}"></td>
+                        <td th:text="${transaction.comment}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+<!--                <div>-->
+<!--                    <span th:if="${hasPrev}"><a th:href="@{/charities?page={prev}(prev=${prev})}">Prev</a>&nbsp;&nbsp;&nbsp;</span>-->
+<!--                    <span th:if="${hasNext}"><a th:href="@{/charities?page={next}(next=${next})}">Next</a></span>-->
+<!--                </div>-->
+            </div>
+    </section>
+
+
+</main>
+</body>
+</html>

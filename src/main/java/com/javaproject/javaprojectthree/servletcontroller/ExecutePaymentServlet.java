@@ -50,6 +50,6 @@ public class ExecutePaymentServlet extends HttpServlet {
             request.setAttribute("errorMessage", ex.getMessage());
             request.getRequestDispatcher("error.jsp").forward(request,response);
         }
-
+        transactionLogController.
     }
 }

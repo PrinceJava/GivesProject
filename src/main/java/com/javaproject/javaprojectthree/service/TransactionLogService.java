@@ -14,7 +14,8 @@ public interface TransactionLogService {
     List<TransactionLog> findAllTransactions();
     List<TransactionLog> findAllTransactionsByReceiver(String receiver);
     TransactionLog findTransactionById(Long id);
-    TransactionLog updateTransaction(TransactionLog transaction);
     void deleteTransaction(TransactionLog transaction);
     Charity findCharityByReceiver(Long transactionId);
+    TransactionLog save(TransactionLog transactionLog);
+    void update(TransactionLog transactionLog);
 }
