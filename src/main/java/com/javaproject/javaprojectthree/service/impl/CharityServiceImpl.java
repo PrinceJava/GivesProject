@@ -1,5 +1,6 @@
 package com.javaproject.javaprojectthree.service.impl;
 
+import com.javaproject.javaprojectthree.JavaProjectThreeApplication;
 import com.javaproject.javaprojectthree.exception.InformationExistException;
 import com.javaproject.javaprojectthree.exception.InformationNotFoundException;
 import com.javaproject.javaprojectthree.model.Charity;
@@ -13,12 +14,14 @@ import com.javaproject.javaprojectthree.model.forms.RegisterForm;
 import com.javaproject.javaprojectthree.repository.CharityRepository;
 import com.javaproject.javaprojectthree.repository.TransactionLogRepository;
 import com.javaproject.javaprojectthree.repository.UserRepository;
+import com.javaproject.javaprojectthree.security.MyUserDetails;
 import com.javaproject.javaprojectthree.service.CharityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.util.StringUtils;
 
@@ -141,14 +144,17 @@ public class CharityServiceImpl implements CharityService {
 
     @Override
     public Charity save(Charity charity) throws InformationNotFoundException, InformationExistException {
-        if (!StringUtils.isEmpty(charity.getTitle())) {
-            if (charity.getId() != null && charityRepository.existsByTitle(charity.getTitle())) {
-                throw new InformationExistException("Charity with id: " + charity.getId() +
-                        " already exists");
+        if(JavaProjectThreeApplication.myUserDetails != null) {
+            if (!StringUtils.isEmpty(charity.getTitle())) {
+                if (charity.getId() != null && charityRepository.existsByTitle(charity.getTitle())) {
+                    throw new InformationExistException("Charity with id: " + charity.getId() +
+                            " already exists");
+                }
+                return charityRepository.save(charity);
+            } else {
+                throw new InformationNotFoundException("Failed to save contact");
             }
-            return charityRepository.save(charity);
-        }
-        else {
+        }else {
             throw new InformationNotFoundException("Failed to save contact");
         }
     }

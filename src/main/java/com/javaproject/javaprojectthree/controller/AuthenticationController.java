@@ -1,6 +1,7 @@
 package com.javaproject.javaprojectthree.controller;
 
 
+import com.javaproject.javaprojectthree.JavaProjectThreeApplication;
 import com.javaproject.javaprojectthree.model.Charity;
 import com.javaproject.javaprojectthree.model.User;
 import com.javaproject.javaprojectthree.model.forms.LoginRequest;
@@ -10,10 +11,10 @@ import com.javaproject.javaprojectthree.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/")
 public class AuthenticationController {
 
     private UserService userService;
@@ -25,7 +26,20 @@ public class AuthenticationController {
     @Autowired
     public void setCharityService(CharityService charityService){this.charityService = charityService;}
 
-    @GetMapping("login")
+    @GetMapping("/")
+    public String homePage(Model model){
+        model.addAttribute("myUser", JavaProjectThreeApplication.myUserDetails);
+        return "index";
+    }
+
+    @GetMapping("/log_out")
+    public String logout(){
+        userService.logout();
+        return "index";
+    }
+
+
+    @GetMapping("/login")
     public String userLogin(){
         return "login";
     }

@@ -12,4 +12,5 @@ public interface UserService {
     List<User> findAllUsers();
     User findUserByEmailAddress(String email);
     User findUserById(Long id);
+    void logout();
 }

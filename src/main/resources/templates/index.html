@@ -19,6 +19,7 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <body>
 <header class="header">
     <img class="logo" alt="gives-logo-photo" th:src="@{/images/logoB.jpeg}" />
+    <ul class="main-nav-list"><li th:if="${myUser != null}" th:text="${myUser.username}"></li></ul>
     <nav class="main-nav">
         <ul class="main-nav-list">
             <li><a class="main-nav-link" href="/admin" sec:authorize="hasRole('ROLE_ADMIN')">ADMIN</a> </li>
@@ -26,8 +27,8 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
             <li><a class="main-nav-link" href="/charities/">Charities</a></li>
             <li><a class="main-nav-link" href="/charities/register">Register</a></li>
             <li>
-                <a sec:authorize="isAuthenticated()" class="main-nav-link" href="#">Log Out</a>
-                <a sec:authorize="isAnonymous()" class="main-nav-link" th:href="@{~/login}">Sign In</a>
+                <a th:if="${myUser ne null}" class="main-nav-link" href="/log_out">Log Out</a>
+                <a th:if="${myUser == null}" class="main-nav-link" href="/login">Login</a>
             </li>
         </ul>
     </nav>
