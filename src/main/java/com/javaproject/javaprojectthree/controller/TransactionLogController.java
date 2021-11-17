@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Controller
@@ -70,8 +71,9 @@ public class TransactionLogController {
     public String addContact(Model model,
                              @ModelAttribute("transaction") TransactionLog transaction,
                              @ModelAttribute("user") User user) {
-        User newUser = userService.findUserByEmailAddress(user.getEmailAddress());
+        User newUser = userService.findUserByEmailAddress(transaction.getSender());
         transaction.setSender(newUser.getUserName());
+        transaction.setDate(LocalDate.now());
         try {
             TransactionLog transactionLog = transactionLogService.save(transaction);
             return "redirect:/transactions/" + transactionLog.getId();
