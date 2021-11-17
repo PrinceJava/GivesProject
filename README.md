@@ -1,9 +1,9 @@
 # paypal-java-capstone-project
 
-##Raul and Matthew Project 3
+## Raul and Matthew Project 3
 
 
-##Getting Started
+## Getting Started
 1. Create a new database called _**projectthree**_ in postgres and connect to it.
     a. \c projecthree
 
@@ -32,16 +32,16 @@ keep track of that goal as they receive payments.
 
 ![img_17.png](images/img_17.png)
 
-##POM Dependencies
+## POM Dependencies
 
 
-##Endpoints
+## Endpoints
 |  |  | |
 | --- | :--- | :---|
 
 
 
-##System Tools Used
+## System Tools Used
 
 |  |  |
 | --- | :--- |
@@ -54,7 +54,7 @@ keep track of that goal as they receive payments.
 |![img_12.png](images/img_12.png) |Thymeleaf
 |![img_14.png](images/img_14.png) |GitHub Branching
 
-##User Stories
+## User Stories
 
 ![img_16.png](images/img_16.png)
 
@@ -73,7 +73,7 @@ keep track of that goal as they receive payments.
 |11. As a user, I would like to keep track of a fundraising total.
 |12. A user can have an admin role or user role. 
 
-##Project Challenges
+## Project Challenges
 
 ![img_4.png](images/img_4.png)
 
