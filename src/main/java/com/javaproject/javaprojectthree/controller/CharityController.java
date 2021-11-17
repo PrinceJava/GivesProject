@@ -43,6 +43,7 @@ public class CharityController {
             Model model){
         model.addAttribute("charity",charityService.findCharityById(charityId));
         model.addAttribute("transactions", charityService.findAllTransactionsByCharityId(charityId));
+        model.addAttribute("myUser", JavaProjectThreeApplication.myUserDetails);
         return "charity";
     }
 
@@ -126,6 +127,6 @@ public class CharityController {
             Model model){
         model.addAttribute("charity",charityService.findCharityById(charityId));
         model.addAttribute("myUser", JavaProjectThreeApplication.myUserDetails);
-        return "checkout.html";
+        return "checkout";
     }
 }

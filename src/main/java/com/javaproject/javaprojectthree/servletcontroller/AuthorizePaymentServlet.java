@@ -17,6 +17,8 @@ import java.io.IOException;
 @WebServlet(name = "authorize_payment", value = "/authorize_payment")
 public class AuthorizePaymentServlet extends HttpServlet {
 
+    Charity charity = null;
+
     public AuthorizePaymentServlet(){}
 
     @Autowired
