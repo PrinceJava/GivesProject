@@ -106,13 +106,7 @@
 		</dependency>
 	</dependencies>
 	<profiles>
-		<profile>
-			<id>production</id>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
-		</profile>
-	</profiles>
+
 
 	<build>
 		<plugins>
