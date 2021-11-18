@@ -65,40 +65,9 @@ public class CharityServiceImpl implements CharityService {
             throw new InformationNotFoundException("Must be logged in to perform this action");
         }
     }
-    @Override
-    public ResponseEntity<?> createCharity(RegisterForm registerForm) {
-        if(JavaProjectThreeApplication.myUserDetails != null) {
-            if (!charityRepository.existsByTitle(registerForm.getTitle())) {
 
-                Charity newCharity = new Charity();
-                newCharity.setTitle(registerForm.getTitle());
-                newCharity.setDescription(registerForm.getDescription());
-                newCharity.setGoal(registerForm.getGoal());
-                newCharity.setTotalReceived(0);
-                newCharity.setVerified(false);
-                newCharity.setPictureURL(registerForm.getPictureURL());
-                newCharity.setUser(
-                        userRepository.findUserByUserName(registerForm.getUsername())
-                );
-                return ResponseEntity.ok(charityRepository.save(newCharity));
-            } else {
-                throw new InformationExistException("Charity with the name " +
-                        registerForm.getTitle() + " already exists");
-            }
-        }
-        else {
-            throw new InformationNotFoundException("Must be logged in to perform this action");
-            }
-    }
 
     @Override
-    public List<Charity> findAllCharities(int pageNumber, int rowPerPage) {
-        List<Charity> contacts = new ArrayList<>();
-        Pageable sortedByIdAsc = PageRequest.of(pageNumber - 1, rowPerPage,
-                Sort.by("id").ascending());
-        charityRepository.findAll(sortedByIdAsc).forEach(contacts::add);
-        return contacts;
-    }
     public List<Charity> findAllCharities(){
         return charityRepository.findAll();
     }
@@ -125,24 +94,6 @@ public class CharityServiceImpl implements CharityService {
     @Override
     public Charity deleteCharity(String title, String description, double goal, double totalReceived, Boolean verified, String pictureURL) {
         return null;
-    }
-
-
-    public Charity updateCharity(Long charityId, String title, double goal, double totalReceived, Boolean verified, String pictureURL) {
-        System.out.println("Service is calling updateCharity ==>");
-        Charity charity = charityRepository.findCharityById(charityId);
-        try {
-            Charity updateCharity = charityRepository.findCharityById(charityId);
-            updateCharity.setTitle(charity.getTitle());
-            updateCharity.setDescription(charity.getDescription());
-            updateCharity.setGoal(charity.getGoal());
-            updateCharity.setTotalReceived(charity.getTotalReceived());
-            updateCharity.setVerified(charity.getVerified());
-            updateCharity.setPictureURL(charity.getPictureURL());
-            return charityRepository.save(charity);
-        } catch (NoSuchElementException e) {
-            throw new InformationNotFoundException("charity name of " + charity + " not found");
-        }
     }
 
 

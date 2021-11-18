@@ -12,7 +12,6 @@ import java.util.List;
 public interface TransactionLogService {
     TransactionLog createTransaction(String sender, String receiver, double amount, String comment);
     List<TransactionLog> findAllTransactions();
-    List<TransactionLog> findAllTransactionsByReceiver(String receiver);
     TransactionLog findTransactionById(Long id);
     void deleteTransaction(TransactionLog transaction);
     Charity findCharityByReceiver(Long transactionId);
