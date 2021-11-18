@@ -44,11 +44,6 @@ public class TransactionLogServiceImpl implements TransactionLogService {
     }
 
     @Override
-    public List<TransactionLog> findAllTransactionsByReceiver(String receiver) {
-        return null;
-    }
-
-    @Override
     public TransactionLog findTransactionById(Long id) {
         return transactionLogRepository.findTransactionLogById(id);
     }
@@ -61,8 +56,7 @@ public class TransactionLogServiceImpl implements TransactionLogService {
     @Override
     public Charity findCharityByReceiver(Long transactionId) {
         TransactionLog transactionLog = transactionLogRepository.findTransactionLogById(transactionId);
-        Charity charity = charityRepository.findByTitle(transactionLog.getReceiver());
-        return charity;
+        return charityRepository.findByTitle(transactionLog.getReceiver());
     }
 
     @Override
