@@ -114,7 +114,6 @@ public class UserServiceImpl implements UserService {
 
 
     public User saveUser(User user) throws InformationNotFoundException, InformationExistException {
-        if(JavaProjectThreeApplication.myUserDetails != null) {
             if (!StringUtils.isEmpty(user.getEmailAddress())) {
                 if (user.getId() != null && userRepository.existsByEmailAddress(user.getEmailAddress())) {
                     throw new InformationExistException("User with id: " + user.getEmailAddress() +
@@ -124,14 +123,20 @@ public class UserServiceImpl implements UserService {
             } else {
                 throw new InformationNotFoundException("Failed to save user");
             }
-        }else {
-            throw new InformationNotFoundException("Failed to save user");
         }
-    }
 
     @Override
     public User showEditUser(User user) {
         return userRepository.findUserByEmailAddress(user.getEmailAddress());
+    }
+
+    @Override
+    public void addUserRole(String username, String roleName) {
+        System.out.println("Calling INIT SERVICE addRoleToUser ==>");
+        User user = userRepository.findUserByUserName(username);
+        Role role = roleRepository.findByName(roleName);
+        user.getRoles().add(role);
+        user.setRoles(user.getRoles());
     }
 
 

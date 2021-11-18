@@ -2,6 +2,7 @@ package com.javaproject.javaprojectthree.controller;
 
 import com.javaproject.javaprojectthree.JavaProjectThreeApplication;
 import com.javaproject.javaprojectthree.exception.InformationNotFoundException;
+import com.javaproject.javaprojectthree.model.Role;
 import com.javaproject.javaprojectthree.model.User;
 import com.javaproject.javaprojectthree.model.forms.LoginRequest;
 import com.javaproject.javaprojectthree.model.forms.RegisterUser;
@@ -11,6 +12,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -20,10 +24,12 @@ public class AuthenticationController {
 
     private UserService userService;
     private CharityService charityService;
+    private UserDetailsService userDetailsService;
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     public void setUserService(UserService userService){this.userService = userService;}
+
 
     @Autowired
     public void setCharityService(CharityService charityService){this.charityService = charityService;}
@@ -58,15 +64,23 @@ public class AuthenticationController {
 
 
     @PostMapping("/register")
-    public User createUser(@RequestBody RegisterUser registerUser){
+    public String createUser(@ModelAttribute("user") User user){
+        System.out.println(user);
+        userService.createUser(
+                user.getFirstName(), user.getLastname(),
+                user.getUserName(), user.getEmailAddress(),
+                user.getPassword(),"ROLE_SENDER");
+
         System.out.println("controller is calling create user ===>");
-        return userService.createUser(registerUser.getUserName(),
-        registerUser.getFirstName(), registerUser.getLastName(), registerUser.getEmailAddress(),
-        registerUser.getPassword(), registerUser.getRole());
+        LoginRequest loginRequest = new LoginRequest(user.getEmailAddress(), user.getPassword());
+        userService.loginUser(loginRequest);
+        return "redirect:/";
     }
 
     @GetMapping("/register")
-    public String userRegister(){
+    public String userRegister(Model model){
+        User user = new User();
+        model.addAttribute("user",user);
         return "register";
     }
 
