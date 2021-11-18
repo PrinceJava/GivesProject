@@ -36,33 +36,28 @@
 <h1 th:text="${add} ? 'Create a User:' : 'Edit a User:'"></h1>
 <a th:href="@{/}">Back to People List</a>
 <br/><br/>
-<form th:action="${add} ? @{/add/register} : @{/{userId}/edit(userId=${userId.id})}"
+<form
       th:object="${user}" method="POST">
         <table>
-            <tr th:if="${user.id}">
-                <td>ID</td>
-                <td>:</td>
-                <td th:utext="${user.id}">...</td>
-            </tr>
             <tr>
                 <td>Email Address:</td>
-                <td><input type="text" name="email" placeholder="email"/></td>
+                <td><input type="email" th:field="*{emailAddress}" placeholder="email"/></td>
             </tr>
             <tr>
                 <td>First Name:</td>
-                <td><input type="text" name="first name" placeholder="first name"/></td>
+                <td><input type="text" th:field="*{firstName}" placeholder="first name"/></td>
             </tr>
             <tr>
                 <td>Last Name:</td>
-                <td><input type="text" name="last name" placeholder="last name"/></td>
+                <td><input type="text" th:field="*{lastname}" placeholder="last name"/></td>
             </tr>
             <tr>
                 <td>Username:</td>
-                <td><input type="text" name="username" placeholder="username"/></td>
+                <td><input type="text" th:field="*{userName}" placeholder="username"/></td>
             </tr>
             <tr>
                 <td>Password</td>
-                <td><input type="password" name="password" placeholder="password" /></td>
+                <td><input type="password" th:field="*{password}" placeholder="password" /></td>
             </tr>
             <tr>
                 <td colspan="2" align="center">
