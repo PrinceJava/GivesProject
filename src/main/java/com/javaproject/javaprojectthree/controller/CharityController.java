@@ -6,7 +6,6 @@ import com.javaproject.javaprojectthree.model.Charity;
 import com.javaproject.javaprojectthree.model.User;
 import com.javaproject.javaprojectthree.service.CharityService;
 import com.javaproject.javaprojectthree.service.UserService;
-import com.javaproject.javaprojectthree.service.impl.PaymentServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -29,15 +28,11 @@ public class CharityController {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    int ROW_PER_PAGE = 5;
-
     @Autowired
     CharityService charityService;
 
     @Autowired
     UserService userService;
-
-
 
 
     @Operation(summary = "Get all the charities",
@@ -147,7 +142,30 @@ public class CharityController {
         }
     }
 
-
+    @Operation(summary = "Delete the selected charity",
+            description = "User can delete the Charity. This end point redirects to list of charities, " +
+                    "Otherwise no action.",
+            tags = {"Charity"})
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Successfully deleted charity",
+                    content = {@Content(
+                            mediaType = "application/json",
+                            schema = @Schema(
+                                    implementation = Charity.class))}),
+            @ApiResponse(responseCode = "400", description = "Invalid charity supplied",
+                    content = @Content),
+            @ApiResponse(responseCode = "404", description = "The resource you were trying to reach is not found",
+                    content = @Content)
+    })
+    @Deprecated
+    @PostMapping("/{charityId}/delete")
+    public String deleteCharity(
+            @PathVariable(value = "charityId") Long charityId){
+            charityService.deleteCharity(charityId);
+        return "charities";
+    }
 
 
     @GetMapping("/{charityId}/checkout")
