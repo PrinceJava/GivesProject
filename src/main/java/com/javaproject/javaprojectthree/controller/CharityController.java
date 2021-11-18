@@ -70,7 +70,23 @@ public class CharityController {
         model.addAttribute("myUser", JavaProjectThreeApplication.myUserDetails);
         return "charity";
     }
-
+    @Operation(summary = "Load create Charity form",
+            description = "Method will take in input of Model, then add a null add field to check if its a new Charity or not, " +
+                    "the newly created NULL charity, and the currently signed user",
+            tags = {"Charity"})
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Successfully loaded charity sign up page",
+                    content = {@Content(
+                            mediaType = "application/json",
+                            schema = @Schema(
+                                    implementation = Charity.class))}),
+            @ApiResponse(responseCode = "400", description = "Invalid format supplied",
+                    content = @Content),
+            @ApiResponse(responseCode = "404", description = "The resource you were trying to reach is not found",
+                    content = @Content)
+    })
     @GetMapping(value = {"/add"})
     public String showAddContact(Model model) {
         if(JavaProjectThreeApplication.myUserDetails != null) {
@@ -86,7 +102,22 @@ public class CharityController {
             return "redirect:/charities/";
         }
     }
-
+    @Operation(summary = "Add new Charity",
+            description = "Add charity is triggered by running the CharityEdit html page.  If check in thymeleaf to see if Charity exists, if not, will redrirect to this post to edit instead of create",
+            tags = {"Charity"})
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Successfully read charity form",
+                    content = {@Content(
+                            mediaType = "application/json",
+                            schema = @Schema(
+                                    implementation = Charity.class))}),
+            @ApiResponse(responseCode = "400", description = "Invalid format supplied",
+                    content = @Content),
+            @ApiResponse(responseCode = "404", description = "The resource you were trying to reach is not found",
+                    content = @Content)
+    })
     @PostMapping(value = "/add")
     public String addContact(Model model,
                              @ModelAttribute("charity") Charity charity,
@@ -122,6 +153,22 @@ public class CharityController {
         return "charitiesEdit";
     }
 
+    @Operation(summary = "Edit existing Charity",
+            description = "Edit charity is triggered by running the CharityEdit html page.  If check in thymeleaf to see if Charity exists, if so will redrirect to this post to edit instead of create",
+            tags = {"Charity"})
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Successfully deleted charity",
+                    content = {@Content(
+                            mediaType = "application/json",
+                            schema = @Schema(
+                                    implementation = Charity.class))}),
+            @ApiResponse(responseCode = "400", description = "Invalid format supplied",
+                    content = @Content),
+            @ApiResponse(responseCode = "404", description = "The resource you were trying to reach is not found",
+                    content = @Content)
+    })
     @PostMapping(value = {"/charities/{charityId}/edit"})
     public String updateCharity(Model model,
                                 @PathVariable long charityId,
@@ -160,14 +207,30 @@ public class CharityController {
                     content = @Content)
     })
     @Deprecated
-    @PostMapping("/{charityId}/delete")
+    @DeleteMapping("/{charityId}/delete")
     public String deleteCharity(
             @PathVariable(value = "charityId") Long charityId){
             charityService.deleteCharity(charityId);
         return "charities";
     }
 
-
+    @Operation(summary = "Initialize Checkout Flow",
+            description = "Initialize Checkout Flow for selected donations, event triggered by URL endpoint or onClick of the donate button on /charity. This end point redirects to */checkout, " +
+                    "Otherwise returns to home page.",
+            tags = {"Charity"})
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Successfully deleted charity",
+                    content = {@Content(
+                            mediaType = "application/json",
+                            schema = @Schema(
+                                    implementation = Charity.class))}),
+            @ApiResponse(responseCode = "400", description = "Invalid charity supplied",
+                    content = @Content),
+            @ApiResponse(responseCode = "404", description = "The resource you were trying to reach is not found",
+                    content = @Content)
+    })
     @GetMapping("/{charityId}/checkout")
     public String charityCheckout(
             @PathVariable(value = "charityId") Long charityId) {

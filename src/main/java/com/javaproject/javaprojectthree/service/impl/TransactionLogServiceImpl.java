@@ -49,8 +49,8 @@ public class TransactionLogServiceImpl implements TransactionLogService {
     }
 
     @Override
-    public void deleteTransaction(TransactionLog transaction) {
-
+    public void deleteTransaction(Long transactionId) {
+        transactionLogRepository.delete(transactionLogRepository.findTransactionLogById(transactionId));
     }
 
     @Override
