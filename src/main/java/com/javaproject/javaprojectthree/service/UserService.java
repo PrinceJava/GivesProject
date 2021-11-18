@@ -15,5 +15,5 @@ public interface UserService {
     void logout();
     User saveUser(User user);
     User showEditUser(User user);
-    public void addUserRole(String username, String roleName);
+
 }

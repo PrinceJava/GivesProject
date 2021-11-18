@@ -1,11 +1,6 @@
 package com.javaproject.javaprojectthree.controller;
 import com.javaproject.javaprojectthree.JavaProjectThreeApplication;
-import com.javaproject.javaprojectthree.exception.InformationNotFoundException;
-import com.javaproject.javaprojectthree.model.Charity;
-import com.javaproject.javaprojectthree.model.User;
 import com.javaproject.javaprojectthree.service.UserService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,11 +12,9 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
 
     private UserService userService;
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     public void setUserService(UserService userService){this.userService = userService;}
-
 
     @GetMapping({"/all", "/people"})
     public String findAllUsers(Model model){
@@ -38,6 +31,4 @@ public class UserController {
         model.addAttribute("myUser", JavaProjectThreeApplication.myUserDetails);
         return "person";
     }
-
-
 }
