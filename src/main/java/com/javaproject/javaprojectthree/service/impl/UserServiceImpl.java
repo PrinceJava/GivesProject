@@ -3,7 +3,6 @@ package com.javaproject.javaprojectthree.service.impl;
 import com.javaproject.javaprojectthree.JavaProjectThreeApplication;
 import com.javaproject.javaprojectthree.exception.InformationExistException;
 import com.javaproject.javaprojectthree.exception.InformationNotFoundException;
-import com.javaproject.javaprojectthree.model.Charity;
 import com.javaproject.javaprojectthree.model.Role;
 import com.javaproject.javaprojectthree.model.User;
 import com.javaproject.javaprojectthree.model.forms.LoginRequest;
@@ -66,9 +65,6 @@ public class UserServiceImpl implements UserService {
 
     public User createUser(String firstName, String lastName, String userName, String emailAddress, String password, String roleName) {
         System.out.println("service is calling createUser==>");
-        // if user not exists by the email
-        // then create the user in the db
-
         if (!userRepository.existsByEmailAddress(emailAddress)) {
 
             User newUser = new User();
@@ -81,7 +77,6 @@ public class UserServiceImpl implements UserService {
             newUser.getRoles().add(role);
             newUser.setRoles(newUser.getRoles());
             return userRepository.save(newUser);
-//            return newUser;
         } else {
             throw new InformationExistException("user with the email address " +
                     emailAddress + " already exists");
@@ -112,8 +107,8 @@ public class UserServiceImpl implements UserService {
         return userRepository.findAll();
         }
 
-
     public User saveUser(User user) throws InformationNotFoundException, InformationExistException {
+        if(JavaProjectThreeApplication.myUserDetails != null) {
             if (!StringUtils.isEmpty(user.getEmailAddress())) {
                 if (user.getId() != null && userRepository.existsByEmailAddress(user.getEmailAddress())) {
                     throw new InformationExistException("User with id: " + user.getEmailAddress() +
@@ -123,24 +118,16 @@ public class UserServiceImpl implements UserService {
             } else {
                 throw new InformationNotFoundException("Failed to save user");
             }
+        }else {
+            throw new InformationNotFoundException("Failed to save user");
         }
+    }
 
     @Override
     public User showEditUser(User user) {
         return userRepository.findUserByEmailAddress(user.getEmailAddress());
     }
 
-    @Override
-    public void addUserRole(String username, String roleName) {
-        System.out.println("Calling INIT SERVICE addRoleToUser ==>");
-        User user = userRepository.findUserByUserName(username);
-        Role role = roleRepository.findByName(roleName);
-        user.getRoles().add(role);
-        user.setRoles(user.getRoles());
-    }
-
-
-    // Implemented method to find user by passed String email Address.
         public User findUserByEmailAddress(String email) {
             return userRepository.findUserByEmailAddress(email);
         }
