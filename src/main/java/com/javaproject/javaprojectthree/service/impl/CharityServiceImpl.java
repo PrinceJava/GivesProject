@@ -77,6 +77,8 @@ public class CharityServiceImpl implements CharityService {
         return charityRepository.findCharityById(id);
     }
 
+    @Override
+    @Deprecated
     public void deleteCharity(Long charityId) {
         if (JavaProjectThreeApplication.myUserDetails != null) {
             System.out.println("Service calling deleteCharity ==>");
@@ -90,12 +92,6 @@ public class CharityServiceImpl implements CharityService {
             throw new InformationNotFoundException("Must be logged in to perform this action");
         }
     }
-
-    @Override
-    public Charity deleteCharity(String title, String description, double goal, double totalReceived, Boolean verified, String pictureURL) {
-        return null;
-    }
-
 
     @Override
     public List<TransactionLog> findAllTransactionsByCharityId(Long charityId) {

@@ -1,6 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;300;700&display=swap" rel="stylesheet">
+
+    <link th:href="@{/styles/index.css}" rel="stylesheet">
+    <link href="styles/index.css" rel="stylesheet">
+    <link th:href="@{/styles/general.css}" rel="stylesheet">
+    <link href="styles/general.css" rel="stylesheet">
     <meta charset="UTF-8">
     <title>Check Out</title>
     <style type="text/css">
@@ -9,7 +21,18 @@
     </style>
 </head>
 <body>
-<div id="checkoutDIV" align="center">
+<header class="header">
+    <a href="/"><img class="logo" alt="gives-logo-photo" src="images/logoB.jpeg"/></a>
+    <nav class="main-nav">
+        <ul class="main-nav-list">
+            <li><a class="main-nav-link" href="/users/people">People</a></li>
+            <li><a class="main-nav-link" href="/charities/">Charities</a></li>
+
+            <li><a class="main-nav-link" href="/">Return Home</a></li>
+        </ul>
+    </nav>
+</header>
+<div id="checkoutDIV" align="center" class="section-gives">
     <h1>Check Out</h1>
     <form action="authorize_payment" method="post">
         <table>

@@ -13,7 +13,7 @@ public interface TransactionLogService {
     TransactionLog createTransaction(String sender, String receiver, double amount, String comment);
     List<TransactionLog> findAllTransactions();
     TransactionLog findTransactionById(Long id);
-    void deleteTransaction(TransactionLog transaction);
+    void deleteTransaction(Long transactionId);
     Charity findCharityByReceiver(Long transactionId);
     Charity findCharityByReceiver(String charityTitle);
     TransactionLog save(TransactionLog transactionLog);
