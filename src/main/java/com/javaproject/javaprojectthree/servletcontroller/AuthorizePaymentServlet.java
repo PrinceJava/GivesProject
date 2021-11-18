@@ -30,11 +30,11 @@ public class AuthorizePaymentServlet extends HttpServlet {
 
         String product = request.getParameter("product");
         String subtotal = request.getParameter("subtotal");
-        String shipping = request.getParameter("shipping");
+//        String shipping = request.getParameter("shipping");
         String tax = request.getParameter("tax");
         String total = request.getParameter("total");
 
-        OrderDetail orderDetail = new OrderDetail(product, subtotal, shipping, tax, total);
+        OrderDetail orderDetail = new OrderDetail(product, subtotal, /*shipping*/ tax, total);
 
         try {
             PaymentServiceImpl paymentService = new PaymentServiceImpl();

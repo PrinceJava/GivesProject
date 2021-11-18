@@ -37,29 +37,26 @@
     <form action="authorize_payment" method="post">
         <table>
             <tr>
-                <td>Product/Services:</td>
-                <td><input type="test" name="product" value="Next iPhone"/></td>
-            </tr>
-            <tr>
                 <td>Sub Total</td>
-                <td><input type="test" name="subtotal" value="100" /></td>
+                <td><input type="text" name="subtotal" placeholder="amount" /></td>
             </tr>
-            <tr>
+<!--            <tr>
                 <td>Shipping</td>
                 <td><input type="text" name="shipping" value="10" /></td>
-            </tr>
+            </tr>-->
             <tr>
                 <td>Tax</td>
-                <td><input type="text" name="tax" value="10" /></td>
+                <td><input type="text" name="tax" placeholder="tax 10%" /></td>
             </tr>
             <tr>
                 <td>Total</td>
-                <td><input type="text" name="total" value="120"/></td>
+                <td><input type="text" name="total" placeholder="total"/></td>
             </tr>
             <tr>
-                <td>
-                    <input type="hidden" name="charity" th:value="${charity.id}">
-                </td>
+            </tr>
+            <tr>
+                <td>Comment:</td>
+                <td><textarea type="text" name="product" placeholder="comment" rows="4" cols="30"></textarea><!--<input type="text" name="product" placeholder="comment"/>--></td>
             </tr>
             <tr>
                 <td colspan="2" align="center">

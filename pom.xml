@@ -105,6 +105,14 @@
 			<version>1.5.12</version>
 		</dependency>
 	</dependencies>
+	<profiles>
+		<profile>
+			<id>production</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+		</profile>
+	</profiles>
 
 	<build>
 		<plugins>
