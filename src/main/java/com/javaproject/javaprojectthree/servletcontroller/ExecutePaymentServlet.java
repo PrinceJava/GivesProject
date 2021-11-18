@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.Locale;
 
 @WebServlet(name = "execute_payment", value = "/execute_payment")
 public class ExecutePaymentServlet extends HttpServlet {
@@ -52,10 +53,10 @@ public class ExecutePaymentServlet extends HttpServlet {
                 sender = JavaProjectThreeApplication.myUserDetails.getUsername();
             }
             transactionLogService.createTransaction(
-                    sender,
+                    sender.toLowerCase(),
                     JavaProjectThreeApplication.charity.getTitle(),
                     Double.parseDouble(transaction.getAmount().getTotal()),
-                    "comment"
+                    transaction.getDescription()
                     );
             // call another post to update database for transaction log with completed and pending
             request.getRequestDispatcher("receipt.jsp").forward(request, response);

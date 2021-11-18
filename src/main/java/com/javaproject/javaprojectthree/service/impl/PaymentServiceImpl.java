@@ -95,7 +95,7 @@ public class PaymentServiceImpl implements PaymentService {
     public List<Transaction> getTransactionInformation(OrderDetail orderDetail) {
         Details details = new Details();
 
-        details.setShipping(orderDetail.getShipping());
+        /*details.setShipping(orderDetail.getShipping());*/
         details.setSubtotal(orderDetail.getSubtotal());
         details.setTax(orderDetail.getTax());
 
