@@ -6,7 +6,12 @@ import com.javaproject.javaprojectthree.model.User;
 import com.javaproject.javaprojectthree.repository.UserRepository;
 import com.javaproject.javaprojectthree.security.MyUserDetails;
 import com.javaproject.javaprojectthree.service.InitService;
+import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.info.Contact;
+import io.swagger.v3.oas.models.info.Info;
+import io.swagger.v3.oas.models.info.License;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -31,6 +36,21 @@ public class JavaProjectThreeApplication {
 	private UserRepository userRepository;
 	@Autowired
 	public void setUserRepository(UserRepository userRepository){this.userRepository = userRepository;}
+
+	Contact contact = new Contact().name("Matthew James & Raul Rosales").email("matjames@paypal.com").url("https://www.linkedin.com/in/matthewljames/");
+
+	@Bean
+	public OpenAPI customOpenAPI(@Value("${info.app.description}") String appDesciption, @Value("${info.app.version}") String appVersion) {
+		return new OpenAPI()
+				.info(new Info()
+						.title("SpringBoot JAVA RestAPI")
+						.contact(contact)
+						.version("1.1")
+						.description("Fully functional marketplace RestAPI")
+						.termsOfService("http://swagger.io/terms/")
+						.license(new License().name("Apache 2.0").url("http://springdoc.org")));
+	}
+
 
 	@Bean
 	CommandLineRunner run(InitService initService) {

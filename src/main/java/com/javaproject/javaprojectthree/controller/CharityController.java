@@ -7,6 +7,12 @@ import com.javaproject.javaprojectthree.model.User;
 import com.javaproject.javaprojectthree.service.CharityService;
 import com.javaproject.javaprojectthree.service.UserService;
 import com.javaproject.javaprojectthree.service.impl.PaymentServiceImpl;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +23,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
+@Tag(name = "Charity", description = "Endpoints for charity CRUD operations")
 @RequestMapping("/charities")
 public class CharityController {
 
@@ -30,6 +37,26 @@ public class CharityController {
     @Autowired
     UserService userService;
 
+
+
+
+    @Operation(summary = "Get all the charities",
+            description = "User can list all the Charities. This end point returns list of charities, " +
+                    "Otherwise an empty list.",
+            tags = {"Charity"})
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Successfully retrieved list",
+                    content = {@Content(
+                            mediaType = "application/json",
+                            schema = @Schema(
+                                    implementation = Charity.class))}),
+            @ApiResponse(responseCode = "400", description = "Invalid list supplied",
+                    content = @Content),
+            @ApiResponse(responseCode = "404", description = "The resource you were trying to reach is not found",
+                    content = @Content)
+    })
     @GetMapping("/")
     public String getCharities(Model model) {
         List<Charity> charities = charityService.findAllCharities();
