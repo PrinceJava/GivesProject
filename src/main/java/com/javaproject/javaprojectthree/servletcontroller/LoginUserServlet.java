@@ -32,7 +32,7 @@ public class LoginUserServlet extends HttpServlet {
 
         try {
             authenticationController.loginUser(loginRequest);
-            String approvalLink = "/";
+            String approvalLink = "http://givesapp-env.eba-j53cbhw3.us-east-2.elasticbeanstalk.com/";
             response.sendRedirect(approvalLink);
         }catch(Exception ignored){
         }
