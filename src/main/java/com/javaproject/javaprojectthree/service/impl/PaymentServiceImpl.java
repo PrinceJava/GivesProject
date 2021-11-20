@@ -87,7 +87,7 @@ public class PaymentServiceImpl implements PaymentService {
     public RedirectUrls getRedirectURLs() {
         RedirectUrls redirectUrls = new RedirectUrls();
         redirectUrls.setCancelUrl("/cancel.html");
-        redirectUrls.setReturnUrl("http://givesapp-env.eba-j53cbhw3.us-east-2.elasticbeanstalk.com/review_payment");
+        redirectUrls.setReturnUrl("http://localhost:8080/review_payment");
         return redirectUrls;
     }
 

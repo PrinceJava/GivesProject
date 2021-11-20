@@ -238,6 +238,6 @@ public class CharityController {
 //        model.addAttribute("charity",charityService.findCharityById(charityId));
 //        model.addAttribute("myUser", JavaProjectThreeApplication.myUserDetails);
             JavaProjectThreeApplication.charity = charityService.findCharityById(charityId);
-            return "redirect:http://givesapp-env.eba-j53cbhw3.us-east-2.elasticbeanstalk.com/checkout.html";
+            return "redirect:http://localhost:8080/checkout.html";
     }
 }

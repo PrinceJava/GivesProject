@@ -6,6 +6,9 @@ import com.javaproject.javaprojectthree.model.User;
 import com.javaproject.javaprojectthree.repository.UserRepository;
 import com.javaproject.javaprojectthree.security.MyUserDetails;
 import com.javaproject.javaprojectthree.service.InitService;
+import com.paypal.api.payments.PayerInfo;
+import com.paypal.api.payments.ShippingAddress;
+import com.paypal.api.payments.Transaction;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Contact;
 import io.swagger.v3.oas.models.info.Info;
@@ -19,12 +22,19 @@ import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.servlet.ViewResolver;
+import org.springframework.web.servlet.view.InternalResourceViewResolver;
+import org.springframework.web.servlet.view.JstlView;
 
 @ServletComponentScan
 @SpringBootApplication
 public class JavaProjectThreeApplication {
 	public static UserDetails myUserDetails = null;
 	public static Charity charity = null;
+	public static String siteURL = "http://givesapp-env.eba-j53cbhw3.us-east-2.elasticbeanstalk.com/";
+	public static PayerInfo payerInfo = null;
+	public static Transaction transaction = null;
+	public static ShippingAddress shippingAddress = null;
 
 	public static void main(String[] args) {
 		SpringApplication.run(JavaProjectThreeApplication.class, args);
@@ -51,6 +61,14 @@ public class JavaProjectThreeApplication {
 						.license(new License().name("Apache 2.0").url("http://springdoc.org")));
 	}
 
+	@Bean
+	public ViewResolver getViewResolver(){
+		InternalResourceViewResolver resolver = new InternalResourceViewResolver();
+		resolver.setPrefix("/WEB-INF/");
+		resolver.setSuffix(".jsp");
+		resolver.setViewClass(JstlView.class);
+		return resolver;
+	}
 
 	@Bean
 	CommandLineRunner run(InitService initService) {

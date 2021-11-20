@@ -36,6 +36,13 @@ public class ExecutePaymentServlet extends HttpServlet {
         String paymentId = request.getParameter("paymentId");
         String payerId = request.getParameter("PayerID");
 
+        String[] payrId = payerId.split(",");
+        String[] payId = paymentId.split(",");
+
+        payerId = payrId[0];
+        paymentId = payId[0];
+
+        // here it is double the values already.  look at removing duplicate
         try {
 
             PaymentService paymentService = new PaymentServiceImpl();
@@ -58,8 +65,9 @@ public class ExecutePaymentServlet extends HttpServlet {
                     Double.parseDouble(transaction.getAmount().getTotal()),
                     transaction.getDescription()
                     );
+            String url = "receipt?paymentId=" + paymentId + "&PayerID=" + payerId;
             // call another post to update database for transaction log with completed and pending
-            request.getRequestDispatcher("receipt.jsp").forward(request, response);
+            request.getRequestDispatcher(url).forward(request, response);
 
         }catch(PayPalRESTException ex){
             ex.printStackTrace();

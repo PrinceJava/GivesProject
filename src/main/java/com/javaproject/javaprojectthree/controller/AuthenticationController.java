@@ -2,10 +2,8 @@ package com.javaproject.javaprojectthree.controller;
 
 import com.javaproject.javaprojectthree.JavaProjectThreeApplication;
 import com.javaproject.javaprojectthree.exception.InformationNotFoundException;
-import com.javaproject.javaprojectthree.model.Role;
 import com.javaproject.javaprojectthree.model.User;
 import com.javaproject.javaprojectthree.model.forms.LoginRequest;
-import com.javaproject.javaprojectthree.model.forms.RegisterUser;
 import com.javaproject.javaprojectthree.service.CharityService;
 import com.javaproject.javaprojectthree.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -18,9 +16,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -81,25 +77,12 @@ public class AuthenticationController {
         return "index";
     }
 
-    @Operation(summary = "User can request to login",
-            description = " This allows the user to log in into their account, " +
-                    "Otherwise the user is not logged in",
-            tags = {"Authentication"})
-    @ApiResponses(value = {
-            @ApiResponse(
-                    responseCode = "200",
-                    description = "Successfully logged in ",
-                    content = @Content),
-            @ApiResponse(responseCode = "400", description = "Invalid credentials",
-                    content = @Content),
-            @ApiResponse(responseCode = "404", description = "The resource you were trying to reach is not found",
-                    content = @Content)
-    })
-    @PostMapping("/login")
-    public ResponseEntity<?> loginUser(LoginRequest loginRequest){
-        System.out.println("Controller is calling loginUser ===>");
-        return userService.loginUser(loginRequest);
-    }
+
+//    @PostMapping("/login")
+//    public ResponseEntity<?> loginUser(LoginRequest loginRequest){
+//        System.out.println("Controller is calling loginUser ===>");
+//        return userService.loginUser(loginRequest);
+//    }
 
     @Operation(summary = "User is logged in",
             description = " This allows the to view their account, " +
@@ -116,8 +99,31 @@ public class AuthenticationController {
                     content = @Content)
     })
     @GetMapping("/login")
-    public String userLogin(){
+    public String userLogin(Model model){
+        User user = new User();
+        model.addAttribute("user", user);
         return "login";
+    }
+
+    @Operation(summary = "User can request to login",
+            description = " This allows the user to log in into their account, " +
+                    "Otherwise the user is not logged in",
+            tags = {"Authentication"})
+    @ApiResponses(value = {
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Successfully logged in ",
+                    content = @Content),
+            @ApiResponse(responseCode = "400", description = "Invalid credentials",
+                    content = @Content),
+            @ApiResponse(responseCode = "404", description = "The resource you were trying to reach is not found",
+                    content = @Content)
+    })
+    @PostMapping("/login")
+    public String login(@ModelAttribute("user") User user){
+        LoginRequest loginRequest = new LoginRequest(user.getEmailAddress(), user.getPassword());
+        userService.loginUser(loginRequest);
+        return "redirect:/";
     }
 
 
@@ -278,6 +284,10 @@ public class AuthenticationController {
             model.addAttribute("User", JavaProjectThreeApplication.myUserDetails);
             return "register";
         }
+    }
+
+    @GetMapping("/test")
+    public String test(){return "test.jsp";
     }
 
 
