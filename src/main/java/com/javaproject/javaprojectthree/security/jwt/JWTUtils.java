@@ -18,8 +18,8 @@ import java.util.stream.Collectors;
 @Service
 public class JWTUtils {
 
-//    @Value("${JWT}")
-    String SECRET_KEY = "SECRET_KEY";
+    @Value("${JWT}")
+    String SECRET_KEY;
 
     //Token Generation staring
     public String generateToken(UserDetails userDetails) {
