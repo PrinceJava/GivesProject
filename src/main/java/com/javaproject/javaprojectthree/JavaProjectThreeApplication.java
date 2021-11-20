@@ -35,6 +35,8 @@ public class JavaProjectThreeApplication {
 	public static PayerInfo payerInfo = null;
 	public static Transaction transaction = null;
 	public static ShippingAddress shippingAddress = null;
+	public static String paymentId = null;
+	public static String payerId = null;
 
 	public static void main(String[] args) {
 		SpringApplication.run(JavaProjectThreeApplication.class, args);

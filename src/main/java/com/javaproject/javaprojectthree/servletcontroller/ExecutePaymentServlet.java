@@ -33,15 +33,18 @@ public class ExecutePaymentServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String paymentId = request.getParameter("paymentId");
-        String payerId = request.getParameter("PayerID");
+//        String paymentId = request.getParameter("paymentId");
+//        String payerId = request.getParameter("PayerID");
 
-        String[] payrId = payerId.split(",");
-        String[] payId = paymentId.split(",");
+//        String[] payrId = payerId.split(",");
+//        String[] payId = paymentId.split(",");
+//
+//        payerId = payrId[0];
+//        paymentId = payId[0];
 
-        payerId = payrId[0];
-        paymentId = payId[0];
 
+        String paymentId = JavaProjectThreeApplication.paymentId;
+        String payerId = JavaProjectThreeApplication.payerId;
         // here it is double the values already.  look at removing duplicate
         try {
 
@@ -65,15 +68,16 @@ public class ExecutePaymentServlet extends HttpServlet {
                     Double.parseDouble(transaction.getAmount().getTotal()),
                     transaction.getDescription()
                     );
-            String url = "receipt?paymentId=" + paymentId + "&PayerID=" + payerId;
+            String url = "/receipt";
             // call another post to update database for transaction log with completed and pending
             request.getRequestDispatcher(url).forward(request, response);
 
         }catch(PayPalRESTException ex){
             ex.printStackTrace();
             request.setAttribute("errorMessage", ex.getMessage());
-            request.getRequestDispatcher("error.jsp").forward(request,response);
+            request.getRequestDispatcher("error.html").forward(request,response);
         }
-
+        JavaProjectThreeApplication.paymentId = null;
+        JavaProjectThreeApplication.payerId = null;
     }
 }

@@ -35,6 +35,8 @@ public class ReviewPaymentServlet extends HttpServlet {
         String paymentId = request.getParameter("paymentId");
         String payerId = request.getParameter("PayerID");
 
+        JavaProjectThreeApplication.paymentId = paymentId;
+        JavaProjectThreeApplication.payerId = payerId;
         try {
             PaymentService paymentService = new PaymentServiceImpl();
             Payment payment = paymentService.getPaymentDetails(paymentId);
