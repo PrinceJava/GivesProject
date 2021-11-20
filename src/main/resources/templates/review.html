@@ -12,13 +12,13 @@
 <body>
 <div id="checkoutDIV" align="center">
     <h1>Please Review Before Paying</h1>
-    <form action="execute_payment" method="post">
+    <form th:action="@{/receipt}" method="post">
         <table>
             <tr>
                 <td colspan="2"><b>Transaction Details:</b></td>
                 <td>
-                    <input type="hidden" name="paymentId" th:value="${paymentId}"/>
-                    <input type="hidden" name="PayerID" th:value="${PayerID}"/>
+<!--                    <input type="hidden" name="paymentId" th:value="${paymentId}"/>-->
+<!--                    <input type="hidden" name="PayerID" th:value="${PayerID}"/>-->
                 </td>
             </tr>
             <tr>
