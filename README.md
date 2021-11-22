@@ -43,7 +43,7 @@ track that goal as they receive payments.
 ## POM Dependencies
 
 ![img_2.png](images/img_pom1.png)
-![img_6.png](images/img_pom2.png)
+![img.png](images/imgpom2.png)
 
 
 ## Endpoints
