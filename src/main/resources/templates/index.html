@@ -44,14 +44,14 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
             Gives goal is to support those supporting others.
                 </p>
             <a href="/charities/" class="btn btn--full">Start Donating!</a>
-            <a href="#" class="btn btn--outline">Learn More &darr;</a>
+            <a href="#sectionHow" class="btn btn--outline">Learn More &darr;</a>
         </div>
         <div class="gives-image-box">
             <img th:src="@{images/Home.png}" alt="" class="gives-home-img">
         </div>
     </div>
 </section>
-<section class="section-how">
+<section class="section-how" id="sectionHow">
     <div class="container">
         <span class="subheading">How it works</span>
         <h2 class="heading-second">Donate in 3 simple steps</h2>
@@ -94,8 +94,8 @@ xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
                  class="step-image"/>
         </div>
     </div>
-
 </section>
+    <a href="/charities/" class="btn btn--full">Start Donating!</a>
 </main>
 
 </body>
