@@ -73,6 +73,7 @@ public class PaymentServiceImpl implements PaymentService {
         Payer payer = new Payer();
         payer.setPaymentMethod("paypal");
 
+        // GOAL was to change this to dynamic based of UserDetails info, didn't get this changed, will later in refactoring/reformatting
         PayerInfo payerInfo = new PayerInfo();
         payerInfo.setFirstName("Matthew")
                 .setLastName("James")
