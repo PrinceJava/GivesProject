@@ -25,6 +25,40 @@ body {
     font-weight: 400;
     color: #555;
 }
+
+/************* TABLE ******************/
+
+.gives-table {
+    border-collapse: collapse;
+    margin: 2.5rem 0;
+    font-size: 0.9em;
+    min-width: 40rem;
+    border-radius: 5px 5px 0 0;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0,0,0,0.15);
+}
+
+.gives-table thead tr {
+    background-color: #7c27cb;
+    color: white;
+    text-align: left;
+    font-weight: bold;
+    font-size: 1.6rem;
+}
+
+.gives-table th, td {
+    padding: 1.2rem 1.5rem;
+}
+.gives-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+.gives-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+.gives-table tbody tr:last-of-type {
+    border-bottom: 2px solid #7c27cb;
+}
+
 /************** NAVIGATION ******************/
 .main-nav-list {
     list-style: none;
