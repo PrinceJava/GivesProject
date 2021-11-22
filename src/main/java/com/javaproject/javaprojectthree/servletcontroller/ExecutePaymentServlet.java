@@ -34,16 +34,6 @@ public class ExecutePaymentServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-//        String paymentId = request.getParameter("paymentId");
-//        String payerId = request.getParameter("PayerID");
-
-//        String[] payrId = payerId.split(",");
-//        String[] payId = paymentId.split(",");
-//
-//        payerId = payrId[0];
-//        paymentId = payId[0];
-
-
         String paymentId = JavaProjectThreeApplication.paymentId;
         String payerId = JavaProjectThreeApplication.payerId;
         // here it is double the values already.  look at removing duplicate

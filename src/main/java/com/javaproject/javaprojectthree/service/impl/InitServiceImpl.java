@@ -65,12 +65,6 @@ public class InitServiceImpl implements InitService {
         user.setRoles(user.getRoles());
     }
 
-//    @Override
-//    public void addCredentialRole(String access){
-//        System.out.println("Calling INIT Service addCredentials ==>");
-////        Credential credential = addCredentialRole("user");
-//    }
-
     @Override
     public Charity createCharity(String title, String description, double goal, double totalReceived, Boolean verified, String pictureURL) {
         System.out.println("Calling INIT SERVICE createCharity ==>");

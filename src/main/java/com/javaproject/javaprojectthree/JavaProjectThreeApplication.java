@@ -31,7 +31,7 @@ import org.springframework.web.servlet.view.JstlView;
 public class JavaProjectThreeApplication {
 	public static UserDetails myUserDetails = null;
 	public static Charity charity = null;
-	public static String siteURL = "http://givesapp-env.eba-j53cbhw3.us-east-2.elasticbeanstalk.com/";
+	public static String siteUrl = "http://Givesapp-env.eba-c8kim7yp.us-east-2.elasticbeanstalk.com ";
 	public static PayerInfo payerInfo = null;
 	public static Transaction transaction = null;
 	public static ShippingAddress shippingAddress = null;

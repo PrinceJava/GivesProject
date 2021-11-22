@@ -234,10 +234,7 @@ public class CharityController {
     @GetMapping("/{charityId}/checkout")
     public String charityCheckout(
             @PathVariable(value = "charityId") Long charityId) {
-//            Model model){
-//        model.addAttribute("charity",charityService.findCharityById(charityId));
-//        model.addAttribute("myUser", JavaProjectThreeApplication.myUserDetails);
             JavaProjectThreeApplication.charity = charityService.findCharityById(charityId);
-            return "redirect:http://givesapp-env.eba-j53cbhw3.us-east-2.elasticbeanstalk.com/checkout.html";
+            return "redirect:http://Givesapp-env.eba-c8kim7yp.us-east-2.elasticbeanstalk.com/checkout.html";
     }
 }
