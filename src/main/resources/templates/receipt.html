@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Payment Receipt</title>
+    <style type="text/css">
+        table{border: 0}
+        table td {padding: 10px}
+    </style>
+</head>
+<body>
+<div id="checkoutDIV" align="center">
+    <h1>Thank you for shopping with us</h1>
+        <table>
+            <tr>
+                <td colspan="2"><b>Transaction Details:</b></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>Merchant:</td>
+                <td>Name of Company LLC.</td>
+            </tr>
+            <tr>
+                <td>Payer:</td>
+                <td th:text="${payer.firstName} + ${payer.lastName}"></td>
+            </tr>
+            <tr>
+                <td>Tax:</td>
+                <td th:text="${transaction.amount.details.tax}"></td>
+            </tr>
+            <tr>
+                <td>Total:</td>
+                <td th:text="${transaction.amount.total}"></td>
+            </tr>
+            <tr><td><br/></td></tr>
+            <tr>
+                <td colspan="2" align="center">
+                    <a href="/">Return Home</a>
+                </td>
+            </tr>
+        </table>
+</div>
+</body>
+</html>

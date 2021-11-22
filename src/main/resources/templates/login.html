@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Log In</title>
@@ -11,15 +12,15 @@
 <body>
 <div id="loginDiv" align="center">
     <h1>Log In</h1>
-    <form action="login_user" method="post">
+    <form th:action="@{/login}" th:object="${user}" method="post">
         <table>
             <tr>
                 <td>Email:</td>
-                <td><input type="text" name="email" placeholder="email"/></td>
+                <td><input type="text" th:field="*{emailAddress}" placeholder="email"/></td>
             </tr>
             <tr>
                 <td>Password</td>
-                <td><input type="password" name="password" placeholder="password" /></td>
+                <td><input type="password" th:field="*{password}" placeholder="password" /></td>
             </tr>
             <tr>
                 <td colspan="2" align="center">
