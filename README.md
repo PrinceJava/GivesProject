@@ -10,6 +10,11 @@
 http://givesapp-env.eba-c8kim7yp.us-east-2.elasticbeanstalk.com/
 
 
+## Cloud Structure
+
+![img.png](images/awsimg.png)
+
+http://givesapp-env.eba-c8kim7yp.us-east-2.elasticbeanstalk.com/swagger-ui/index.html?configUrl=/api-docs/swagger-config#/
 ### Welcome to the Giving App Project with Java Spring Boot
 
 ![img.png](images/img.png)
@@ -36,6 +41,9 @@ track that goal as they receive payments.
 ![img_17.png](images/img_17.png)
 
 ## POM Dependencies
+
+![img_2.png](images/img_pom1.png)
+![img_6.png](images/img_pom2.png)
 
 
 ## Endpoints
