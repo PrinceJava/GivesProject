@@ -15,11 +15,9 @@ public class PaymentServiceImpl implements PaymentService {
 
     public static Charity charity = JavaProjectThreeApplication.charity;
 
-    //private static final String CLIENT_ID = "ASZi1Ccgr3gq3AL_Qg046RBD556tg_mADvDUAdX0uB7ysX35FvbN3JzUxh-9ycCy61Ba5qrLcpacuZ8w";
+
     private static final String CLIENT_ID = charity.getCLIENT_ID();
-    //private static final String CLIENT_SECRET = "EHczyy5HpMK2emUAPSW8TOfk77oiutx5xd-QdXpfYNTo5sYeDx-I1yZGgfayLYG1kiGgMEuW_DJdC73A";
     private static final String CLIENT_SECRET = charity.getCLIENT_SECRET();
-    //private static final String MODE = "sandbox";
     private static final String MODE = charity.getMODE();
 
 
@@ -86,8 +84,8 @@ public class PaymentServiceImpl implements PaymentService {
     @Override
     public RedirectUrls getRedirectURLs() {
         RedirectUrls redirectUrls = new RedirectUrls();
-        redirectUrls.setCancelUrl("http://givesapp-env.eba-j53cbhw3.us-east-2.elasticbeanstalk.com/cancel.html");
-        redirectUrls.setReturnUrl("http://givesapp-env.eba-j53cbhw3.us-east-2.elasticbeanstalk.com/review_payment");
+        redirectUrls.setCancelUrl("http://Givesapp-env.eba-c8kim7yp.us-east-2.elasticbeanstalk.com/cancel.html");
+        redirectUrls.setReturnUrl("http://Givesapp-env.eba-c8kim7yp.us-east-2.elasticbeanstalk.com/review_payment");
         return redirectUrls;
     }
 

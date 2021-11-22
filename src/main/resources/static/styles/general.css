@@ -31,7 +31,7 @@ body {
 .gives-table {
     border-collapse: collapse;
     margin: 2.5rem 0;
-    font-size: 0.9em;
+    font-size: 1.2em;
     min-width: 40rem;
     border-radius: 5px 5px 0 0;
     overflow: hidden;
@@ -43,7 +43,7 @@ body {
     color: white;
     text-align: left;
     font-weight: bold;
-    font-size: 1.6rem;
+    font-size: 1.8rem;
 }
 
 .gives-table th, td {

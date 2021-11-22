@@ -285,10 +285,4 @@ public class AuthenticationController {
             return "register";
         }
     }
-
-    @GetMapping("/test")
-    public String test(){return "test.jsp";
-    }
-
-
 }
